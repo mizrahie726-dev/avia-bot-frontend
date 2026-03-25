@@ -268,6 +268,38 @@ a { text-decoration: none; color: inherit; }
 .pkg-list li { font-size: 13px; display: flex; align-items: flex-start; gap: 9px; line-height: 1.4; }
 .pkg-list li .ck { color: var(--green); font-weight: 800; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 
+/* ────────── ABOUT ────────── */
+.about-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; max-width: 1060px; margin: 0 auto; align-items: start; }
+.about-visual { display: flex; flex-direction: column; gap: 20px; }
+.about-avatar { background: var(--ink); border-radius: var(--r-lg); padding: 32px; text-align: center; position: relative; overflow: hidden; }
+.about-avatar::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(22,163,74,0.15) 0%, transparent 60%); }
+.av-circle { width: 100px; height: 100px; background: rgba(22,163,74,0.15); border: 2px solid rgba(22,163,74,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 44px; margin: 0 auto 16px; }
+.av-badge-lic { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 10px 16px; }
+.av-badge-icon { font-size: 22px; }
+.av-badge-title { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 600; }
+.av-badge-num { font-size: 15px; font-weight: 800; color: white; }
+.lic-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.lic-header { background: var(--ink); color: white; padding: 12px 16px; font-size: 13px; font-weight: 700; }
+.lic-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.lic-row:last-of-type { border-bottom: none; }
+.lic-key { color: var(--slate); font-weight: 500; }
+.lic-val { font-weight: 600; }
+.lic-val.bold { font-weight: 800; }
+.lic-val.green { color: var(--green); }
+.lic-status { background: var(--green-s); color: var(--green); padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.lic-verify { padding: 10px 16px; background: var(--bg); border-top: 1px solid var(--border); font-size: 12px; }
+.lic-verify a { color: var(--green); font-weight: 700; }
+.about-text { }
+.about-p { font-size: 15px; color: var(--slate); line-height: 1.8; margin-bottom: 16px; }
+.creds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 28px 0; }
+.cred-item { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 10px; text-align: center; }
+.cred-num { font-size: 22px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; }
+.cred-label { font-size: 11px; color: var(--slate); font-weight: 600; margin-top: 3px; }
+.expertise-list { margin-top: 8px; }
+.exp-label { font-size: 11px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.exp-tag { background: var(--green-s); color: var(--green); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+
 /* ────────── PROCESS ────────── */
 .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; max-width: 900px; margin: 0 auto; position: relative; }
 .process-grid::before { content: ''; position: absolute; top: 28px; inset-inline: 0; height: 1px; background: var(--border); }
@@ -368,6 +400,8 @@ a { text-decoration: none; color: inherit; }
   .sec { padding: 64px 24px; }
   .trust { padding: 0; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
   .trust-item { padding: 14px 18px; flex-shrink: 0; font-size: 12px; }
+  .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  .creds-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-inner { grid-template-columns: 1fr; gap: 32px; }
   .process-grid::before { display: none; }
   .footer { flex-direction: column; text-align: center; padding: 24px; }
@@ -404,6 +438,7 @@ a { text-decoration: none; color: inherit; }
   <div class="nav-links">
     <a href="#biztypes">סוגי עסקים</a>
     <a href="#why">למה אנחנו</a>
+    <a href="#about">אודות</a>
     <a href="#proposal">הצעת מחיר</a>
     <a href="#packages">חבילות</a>
   </div>
@@ -540,6 +575,71 @@ a { text-decoration: none; color: inherit; }
       <div class="why-ico">👤</div>
       <div class="why-title">ישירות עם שלומי</div>
       <div class="why-body">לא קול-סנטר, לא מוקד. מדברים ישירות עם שלומי לוי — מדביר מוסמך שמכיר את העסק שלכם אישית.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-avatar">
+        <div class="av-circle">🦟</div>
+        <div class="av-badge-lic">
+          <span class="av-badge-icon">🏅</span>
+          <div>
+            <div class="av-badge-title">רישיון מוסמך</div>
+            <div class="av-badge-num">מס' 3151</div>
+          </div>
+        </div>
+      </div>
+      <div class="lic-card reveal">
+        <div class="lic-header">📋 פרטי הרישיון הרשמי</div>
+        <div class="lic-row"><span class="lic-key">שם בעל הרישיון</span><span class="lic-val">שלומי לוי</span></div>
+        <div class="lic-row"><span class="lic-key">מספר רישיון</span><span class="lic-val bold green">3151</span></div>
+        <div class="lic-row"><span class="lic-key">גוף מרשה</span><span class="lic-val">משרד הבריאות</span></div>
+        <div class="lic-row"><span class="lic-key">תוקף עד</span><span class="lic-val bold">14 בספטמבר 2029</span></div>
+        <div class="lic-row"><span class="lic-key">סטטוס</span><span class="lic-val"><span class="lic-status">✓ פעיל</span></span></div>
+        <div class="lic-verify"><a href="https://www.aviahadbarot.com/רישיונות-והיתרים/" target="_blank">לצפייה ברישיון המלא ←</a></div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="label-tag">אודות</div>
+      <h2 class="sec-title" style="margin-bottom:16px">שלומי לוי —<br>18 שנה בשטח</h2>
+      <p class="about-p">שלומי לוי הוא מדביר מוסמך ומורשה מטעם משרד הבריאות, בעל תואר בהנדסת תעשייה וניהול. עם למעלה מ-18 שנות ניסיון בתחום ההדברה המקצועית, שלומי צבר ניסיון עשיר בטיפול במגוון רחב של מזיקים — ממוסדות רפואיים ועד מפעלי מזון.</p>
+      <p class="about-p">בניגוד לחברות גדולות שבהן מגיע טכנאי אחר בכל פעם — כאן שלומי עצמו מגיע, מכיר את העסק שלכם, ויודע את ההיסטוריה של הטיפול. זה ההבדל בין שירות לשותפות.</p>
+      <div class="creds-grid">
+        <div class="cred-item">
+          <div class="cred-num">18+</div>
+          <div class="cred-label">שנות ניסיון</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">200+</div>
+          <div class="cred-label">עסקים מטופלים</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">3151</div>
+          <div class="cred-label">מספר רישיון</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">2029</div>
+          <div class="cred-label">תוקף הרישיון</div>
+        </div>
+      </div>
+      <div class="expertise-list">
+        <div class="exp-label">תחומי התמחות</div>
+        <div class="exp-tags">
+          <span class="exp-tag">מקקים</span>
+          <span class="exp-tag">עכברים וחולדות</span>
+          <span class="exp-tag">טרמיטים</span>
+          <span class="exp-tag">נמלים</span>
+          <span class="exp-tag">יתושים וזבובים</span>
+          <span class="exp-tag">פרעושים וקרציות</span>
+          <span class="exp-tag">עקרבים</span>
+          <span class="exp-tag">הדברה אורגנית</span>
+          <span class="exp-tag">לכידת נחשים</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
