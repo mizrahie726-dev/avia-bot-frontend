@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סוכן לידים AI — אביה הדברות</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a2e44; direction: rtl; }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #1a2e44 0%, #2d5016 100%);
+    color: white; padding: 18px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  }
+  .header-logo { display: flex; align-items: center; gap: 12px; }
+  .header-logo .icon { font-size: 32px; }
+  .header-logo h1 { font-size: 22px; font-weight: 700; }
+  .header-logo p { font-size: 12px; opacity: 0.8; }
+  .header-date { font-size: 13px; opacity: 0.7; }
+
+  /* ===== STATS ===== */
+  .stats { display: flex; gap: 16px; padding: 20px 28px; flex-wrap: wrap; }
+  .stat-card {
+    background: white; border-radius: 12px; padding: 18px 24px;
+    flex: 1; min-width: 150px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-right: 4px solid #2d7d32;
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card.orange { border-right-color: #e65100; }
+  .stat-card.blue { border-right-color: #1565c0; }
+  .stat-card.purple { border-right-color: #6a1b9a; }
+  .stat-card.red { border-right-color: #c62828; }
+  .stat-num { font-size: 32px; font-weight: 700; color: #1a2e44; }
+  .stat-label { font-size: 13px; color: #666; margin-top: 4px; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main { display: flex; gap: 20px; padding: 0 28px 28px; flex-wrap: wrap; }
+  .panel-left { flex: 2; min-width: 300px; }
+  .panel-right { flex: 1; min-width: 280px; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: white; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .card-header {
+    background: #1a2e44; color: white;
+    padding: 14px 20px; font-size: 15px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    justify-content: space-between;
+  }
+  .card-body { padding: 20px; }
+
+  /* ===== TOOLBAR ===== */
+  .toolbar {
+    display: flex; gap: 10px; padding: 14px 20px;
+    background: #f8f9fa; border-bottom: 1px solid #e8ecf0;
+    flex-wrap: wrap; align-items: center;
+  }
+  .toolbar input, .toolbar select {
+    padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 13px; font-family: inherit; direction: rtl;
+    background: white;
+  }
+  .toolbar input { flex: 1; min-width: 160px; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    padding: 8px 16px; border: none; border-radius: 8px;
+    cursor: pointer; font-size: 13px; font-family: inherit;
+    font-weight: 600; transition: all 0.2s; display: inline-flex;
+    align-items: center; gap: 6px;
+  }
+  .btn-primary { background: #2d7d32; color: white; }
+  .btn-primary:hover { background: #1b5e20; }
+  .btn-orange { background: #e65100; color: white; }
+  .btn-orange:hover { background: #bf360c; }
+  .btn-blue { background: #1565c0; color: white; }
+  .btn-blue:hover { background: #0d47a1; }
+  .btn-red { background: #c62828; color: white; }
+  .btn-red:hover { background: #b71c1c; }
+  .btn-gray { background: #78909c; color: white; }
+  .btn-gray:hover { background: #546e7a; }
+  .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 6px; }
+  .btn-whatsapp { background: #25d366; color: white; }
+  .btn-whatsapp:hover { background: #128c7e; }
+
+  /* ===== TABLE ===== */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f0f4f8; padding: 10px 14px; text-align: right; font-weight: 600; color: #444; border-bottom: 2px solid #e0e6ed; white-space: nowrap; }
+  td { padding: 10px 14px; border-bottom: 1px solid #f0f4f8; vertical-align: middle; }
+  tr:hover td { background: #f8fbff; }
+  .td-actions { display: flex; gap: 6px; flex-wrap: nowrap; }
+
+  /* ===== STATUS BADGES ===== */
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge-new { background: #e3f2fd; color: #1565c0; }
+  .badge-contacted { background: #fff3e0; color: #e65100; }
+  .badge-scheduled { background: #e8f5e9; color: #2d7d32; }
+  .badge-done { background: #ede7f6; color: #6a1b9a; }
+  .badge-irrelevant { background: #ffebee; color: #c62828; }
+
+  /* ===== PIPELINE BAR ===== */
+  .pipeline {
+    display: flex; align-items: stretch;
+    padding: 0 28px 20px; gap: 0; overflow-x: auto;
+  }
+  .pipe-step {
+    flex: 1; min-width: 110px; background: white;
+    padding: 14px 12px; text-align: center; cursor: pointer;
+    border: 2px solid #e8ecf0; border-left: none;
+    transition: all 0.2s; position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .pipe-step:first-child { border-radius: 10px 0 0 10px; border-left: 2px solid #e8ecf0; }
+  .pipe-step:last-child { border-radius: 0 10px 10px 0; }
+  .pipe-step:hover { background: #f0f7ff; }
+  .pipe-step.active-new { background: #e3f2fd; border-color: #1565c0; }
+  .pipe-step.active-contacted { background: #fff3e0; border-color: #e65100; }
+  .pipe-step.active-scheduled { background: #e8f5e9; border-color: #2d7d32; }
+  .pipe-step.active-done { background: #ede7f6; border-color: #6a1b9a; }
+  .pipe-step.active-irrelevant { background: #ffebee; border-color: #c62828; }
+  .pipe-arrow {
+    width: 0; height: 0;
+    border-top: 28px solid transparent;
+    border-bottom: 28px solid transparent;
+    border-right: 16px solid #e8ecf0;
+    flex-shrink: 0; align-self: center; margin: 0 -2px; z-index: 1;
+  }
+  .pipe-num { font-size: 24px; font-weight: 700; color: #1a2e44; }
+  .pipe-label { font-size: 11px; color: #666; font-weight: 600; }
+  .pipe-icon { font-size: 18px; }
+
+  /* ===== NEXT STEP BUTTON ===== */
+  .btn-next { background: #ff6f00; color: white; font-size: 11px; }
+  .btn-next:hover { background: #e65100; }
+  .btn-close-deal { background: #2d7d32; color: white; }
+  .btn-close-deal:hover { background: #1b5e20; box-shadow: 0 0 0 3px rgba(45,125,50,0.3); }
+
+  /* ===== PIPELINE DETAIL ===== */
+  .pipeline-steps {
+    display: flex; gap: 0; margin-bottom: 20px; border-radius: 10px; overflow: hidden;
+    border: 1px solid #e8ecf0;
+  }
+  .ps-step {
+    flex: 1; padding: 10px 6px; text-align: center;
+    font-size: 11px; font-weight: 600; color: #aaa;
+    background: #f8f9fa; border-left: 1px solid #e8ecf0;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .ps-step:first-child { border-left: none; }
+  .ps-step.ps-done-past { background: #e8f5e9; color: #2d7d32; }
+  .ps-step.ps-current { background: #1a2e44; color: white; }
+  .ps-step .ps-icon { font-size: 16px; }
+
+  /* ===== FORMS ===== */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 12px; font-weight: 600; color: #555; }
+  input, select, textarea {
+    padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 13px; font-family: inherit; direction: rtl;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: #2d7d32; box-shadow: 0 0 0 2px rgba(45,125,50,0.15);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* ===== AI MESSAGE BOX ===== */
+  .ai-message-box {
+    background: #f0f7ff; border: 1px solid #bbdefb; border-radius: 10px;
+    padding: 14px; margin-top: 12px; font-size: 14px; line-height: 1.7;
+    color: #1a2e44; white-space: pre-wrap; min-height: 60px;
+    position: relative;
+  }
+  .ai-message-box.loading { color: #999; font-style: italic; }
+  .ai-badge {
+    display: inline-block; background: #1565c0; color: white;
+    font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* ===== NOTES ===== */
+  .notes-list { max-height: 200px; overflow-y: auto; }
+  .note-item {
+    background: #fffde7; border-right: 3px solid #fbc02d;
+    padding: 10px 12px; margin-bottom: 8px; border-radius: 6px;
+    font-size: 13px;
+  }
+  .note-meta { font-size: 11px; color: #999; margin-bottom: 4px; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 1000;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 16px; padding: 28px;
+    width: 90%; max-width: 540px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  }
+  .modal-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 2px solid #e8ecf0;
+  }
+  .modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+
+  /* ===== URGENCY ===== */
+  .urgency-high { color: #c62828; font-weight: 700; }
+  .urgency-med { color: #e65100; }
+  .urgency-low { color: #2d7d32; }
+
+  /* ===== EMPTY STATE ===== */
+  .empty-state {
+    text-align: center; padding: 50px 20px; color: #aaa;
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { padding: 4px 0; }
+  .tl-item { display: flex; gap: 10px; margin-bottom: 14px; align-items: flex-start; }
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #2d7d32; margin-top: 5px; flex-shrink: 0;
+  }
+  .tl-content { font-size: 13px; line-height: 1.5; }
+  .tl-time { font-size: 11px; color: #999; }
+
+  /* ===== NOTIFICATION TOAST ===== */
+  #toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: #1a2e44; color: white; padding: 12px 24px; border-radius: 10px;
+    font-size: 14px; z-index: 9999; opacity: 0; transition: opacity 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  #toast.show { opacity: 1; }
+
+  @media (max-width: 768px) {
+    /* Header */
+    .header { padding: 14px 16px; }
+    .header-logo h1 { font-size: 18px; }
+    .header-date { display: none; }
+
+    /* Stats */
+    .stats { padding: 12px; gap: 8px; }
+    .stat-card { min-width: calc(50% - 8px); padding: 14px 16px; flex: none; }
+    .stat-num { font-size: 26px; }
+
+    /* Layout */
+    .main { padding: 0 12px 20px; flex-direction: column; }
+    .panel-left, .panel-right { min-width: unset; width: 100%; }
+
+    /* Toolbar */
+    .toolbar { gap: 8px; }
+    .toolbar input, .toolbar select { width: 100%; }
+
+    /* Hide table, show cards instead */
+    table thead { display: none; }
+    table, table tbody, table tr, table td { display: block; width: 100%; }
+    table tr {
+      background: white; border-radius: 10px; margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 14px;
+      border: 1px solid #e8ecf0;
+    }
+    table tr:hover td { background: transparent; }
+    table td {
+      padding: 4px 0; border: none; font-size: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    table td::before {
+      content: attr(data-label);
+      font-weight: 600; color: #888; font-size: 11px;
+      min-width: 70px;
+    }
+    table td:last-child { padding-top: 10px; border-top: 1px solid #f0f4f8; margin-top: 6px; }
+    .td-actions { flex-wrap: wrap; }
+    .td-actions .btn { flex: 1; justify-content: center; min-height: 38px; }
+
+    /* Modal */
+    .modal { width: 100%; max-width: 100%; margin: 0; border-radius: 16px 16px 0 0; position: fixed; bottom: 0; max-height: 92vh; }
+    .modal-overlay.open { align-items: flex-end; }
+
+    /* Form */
+    .form-grid { grid-template-columns: 1fr; }
+
+    /* Buttons touch-friendly */
+    .btn { min-height: 40px; }
+
+    /* AI box */
+    .ai-message-box { font-size: 15px; }
+  }
+
+  @media (max-width: 400px) {
+    .stat-card { min-width: calc(50% - 6px); }
+    .stat-num { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">
+    <div class="icon">🦟</div>
+    <div>
+      <h1>סוכן לידים AI</h1>
+      <p>אביה הדברות — ניהול לידים חכם</p>
+    </div>
+  </div>
+  <div class="header-date" id="headerDate"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-num" id="statTotal">0</div>
+    <div class="stat-label">סה"כ לידים</div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-num" id="statNew">0</div>
+    <div class="stat-label">לידים חדשים</div>
+  </div>
+  <div class="stat-card blue">
+    <div class="stat-num" id="statScheduled">0</div>
+    <div class="stat-label">פגישות מתוכננות</div>
+  </div>
+  <div class="stat-card purple">
+    <div class="stat-num" id="statDone">0</div>
+    <div class="stat-label">עסקאות סגורות</div>
+  </div>
+  <div class="stat-card red">
+    <div class="stat-num" id="statFollowup">0</div>
+    <div class="stat-label">ממתינים לפולואפ</div>
+  </div>
+</div>
+
+<!-- PIPELINE BAR -->
+<div class="pipeline" id="pipelineBar">
+  <div class="pipe-step" id="pipe-new" onclick="filterByStatus('new')">
+    <div class="pipe-icon">🆕</div>
+    <div class="pipe-num" id="pipeNum-new">0</div>
+    <div class="pipe-label">חדש</div>
+  </div>
+  <div class="pipe-arrow"></div>
+  <div class="pipe-step" id="pipe-contacted" onclick="filterByStatus('contacted')">
+    <div class="pipe-icon">📞</div>
+    <div class="pipe-num" id="pipeNum-contacted">0</div>
+    <div class="pipe-label">יצרנו קשר</div>
+  </div>
+  <div class="pipe-arrow"></div>
+  <div class="pipe-step" id="pipe-scheduled" onclick="filterByStatus('scheduled')">
+    <div class="pipe-icon">📅</div>
+    <div class="pipe-num" id="pipeNum-scheduled">0</div>
+    <div class="pipe-label">נקבעה פגישה</div>
+  </div>
+  <div class="pipe-arrow"></div>
+  <div class="pipe-step" id="pipe-done" onclick="filterByStatus('done')">
+    <div class="pipe-icon">✅</div>
+    <div class="pipe-num" id="pipeNum-done">0</div>
+    <div class="pipe-label">עסקה סגורה</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT: LEADS TABLE -->
+  <div class="panel-left">
+    <div class="card">
+      <div class="card-header">
+        <span>📋 לידים</span>
+        <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ ליד חדש</button>
+      </div>
+      <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="חיפוש לפי שם / טלפון / מזיק..." oninput="renderTable()">
+        <select id="filterStatus" onchange="renderTable()">
+          <option value="">כל הסטטוסים</option>
+          <option value="new">חדש</option>
+          <option value="contacted">יצרנו קשר</option>
+          <option value="scheduled">נקבעה פגישה</option>
+          <option value="done">בוצע</option>
+          <option value="irrelevant">לא רלוונטי</option>
+        </select>
+        <select id="filterPest" onchange="renderTable()">
+          <option value="">כל המזיקים</option>
+          <option value="מקקים">מקקים</option>
+          <option value="נמלים">נמלים</option>
+          <option value="עכברים">עכברים</option>
+          <option value="יתושים">יתושים</option>
+          <option value="פרעושים">פרעושים</option>
+          <option value="קרציות">קרציות</option>
+          <option value="דבורים/צרעות">דבורים/צרעות</option>
+          <option value="ג'וקים">ג'וקים</option>
+          <option value="אחר">אחר</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>שם</th>
+              <th>טלפון</th>
+              <th>מזיק</th>
+              <th>אזור</th>
+              <th>סטטוס</th>
+              <th>תאריך</th>
+              <th>פעולות</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state" style="display:none">
+          <div class="icon">🔍</div>
+          <div>לא נמצאו לידים</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PANELS -->
+  <div class="panel-right">
+
+    <!-- AI FOLLOW-UP GENERATOR -->
+    <div class="card">
+      <div class="card-header">
+        <span>🤖 יצירת הודעת פולואפ AI</span>
+      </div>
+      <div class="card-body">
+        <div class="form-group" style="margin-bottom:12px">
+          <label>בחר ליד:</label>
+          <select id="aiLeadSelect" onchange="onAiLeadSelect()">
+            <option value="">— בחר ליד —</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:12px">
+          <label>סוג הודעה:</label>
+          <select id="aiMsgType">
+            <option value="followup_new">פולואפ — ליד חדש לא ענה</option>
+            <option value="followup_after">פולואפ — אחרי שיחה ראשונה</option>
+            <option value="reminder_before">תזכורת — לפני הטיפול</option>
+            <option value="after_treatment">אחרי הטיפול — בקשת ביקורת</option>
+            <option value="reactivate">החייאת ליד קר</option>
+          </select>
+        </div>
+        <button class="btn btn-blue" onclick="generateAIMessage()" style="width:100%">
+          ✨ צור הודעה עם AI
+        </button>
+        <div id="aiResultBox" style="display:none; margin-top:12px">
+          <div class="ai-badge">🤖 AI</div>
+          <div class="ai-message-box" id="aiMessageText"></div>
+          <div style="display:flex; gap:8px; margin-top:10px">
+            <button class="btn btn-whatsapp btn-sm" id="waSendBtn" onclick="sendViaWhatsApp()" style="flex:1">
+              📱 שלח WhatsApp
+            </button>
+            <button class="btn btn-gray btn-sm" onclick="copyMessage()" style="flex:1">
+              📋 העתק
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODAY'S APPOINTMENTS -->
+    <div class="card">
+      <div class="card-header">
+        <span>📅 פגישות היום</span>
+      </div>
+      <div class="card-body" id="todayAppointments">
+        <div style="color:#aaa; font-size:13px; text-align:center; padding:20px">אין פגישות היום</div>
+      </div>
+    </div>
+
+    <!-- QUICK ADD NOTE -->
+    <div class="card">
+      <div class="card-header">
+        <span>📝 הוסף הערה מהירה</span>
+      </div>
+      <div class="card-body">
+        <div class="form-group" style="margin-bottom:10px">
+          <select id="noteLeadSelect">
+            <option value="">— בחר ליד —</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+          <textarea id="noteText" placeholder="כתוב הערה..." rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="addNote()" style="width:100%">שמור הערה</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== MODAL: ADD/EDIT LEAD ===== -->
+<div class="modal-overlay" id="leadModal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">הוסף ליד חדש</div>
+    <input type="hidden" id="editLeadId">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>שם מלא *</label>
+        <input type="text" id="fName" placeholder="ישראל ישראלי">
+      </div>
+      <div class="form-group">
+        <label>טלפון *</label>
+        <input type="tel" id="fPhone" placeholder="050-0000000">
+      </div>
+      <div class="form-group">
+        <label>מזיק</label>
+        <select id="fPest">
+          <option value="">— בחר —</option>
+          <option>מקקים</option>
+          <option>נמלים</option>
+          <option>עכברים</option>
+          <option>יתושים</option>
+          <option>פרעושים</option>
+          <option>קרציות</option>
+          <option>דבורים/צרעות</option>
+          <option>ג'וקים</option>
+          <option>אחר</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>אזור</label>
+        <input type="text" id="fArea" placeholder="תל אביב, מרכז...">
+      </div>
+      <div class="form-group">
+        <label>סטטוס</label>
+        <select id="fStatus">
+          <option value="new">חדש</option>
+          <option value="contacted">יצרנו קשר</option>
+          <option value="scheduled">נקבעה פגישה</option>
+          <option value="done">בוצע</option>
+          <option value="irrelevant">לא רלוונטי</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>דחיפות</label>
+        <select id="fUrgency">
+          <option value="low">נמוכה</option>
+          <option value="med">בינונית</option>
+          <option value="high">גבוהה</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>תאריך פגישה (אם נקבעה)</label>
+        <input type="datetime-local" id="fAppointment">
+      </div>
+      <div class="form-group full">
+        <label>מקור הליד</label>
+        <select id="fSource">
+          <option value="website">אתר / בוט</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="phone">טלפון ישיר</option>
+          <option value="referral">המלצה</option>
+          <option value="google">גוגל</option>
+          <option value="other">אחר</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>הערות</label>
+        <textarea id="fNotes" placeholder="פרטים נוספים..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-gray" onclick="closeModal()">ביטול</button>
+      <button class="btn btn-primary" onclick="saveLead()">שמור</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: LEAD DETAIL ===== -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div class="modal-title" id="detailTitle">פרטי ליד</div>
+    <div id="detailContent"></div>
+    <div class="modal-actions">
+      <button class="btn btn-gray" onclick="closeDetailModal()">סגור</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+// ===== CONFIG =====
+const RAILWAY_SERVER = 'https://nodejs-production-55c3.up.railway.app';
+const BUSINESS_NAME = 'אביה הדברות';
+const OWNER_NAME = 'שלומי';
+const OWNER_PHONE = '0527807612';
+
+// ===== DATA =====
+let leads = JSON.parse(localStorage.getItem('avia_leads') || '[]');
+let currentAiLead = null;
+
+function saveLeads() {
+  localStorage.setItem('avia_leads', JSON.stringify(leads));
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('headerDate').textContent = new Date().toLocaleDateString('he-IL', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Demo leads if empty
+  if (leads.length === 0) {
+    leads = [
+      { id: genId(), name: 'דוד כהן', phone: '054-1234567', pest: 'מקקים', area: 'תל אביב', status: 'new', urgency: 'high', source: 'website', appointment: '', notes: 'דירה קטנה, קומה 3', createdAt: new Date(Date.now() - 86400000*2).toISOString(), timeline: [] },
+      { id: genId(), name: 'שרה לוי', phone: '052-9876543', pest: 'נמלים', area: 'רמת גן', status: 'contacted', urgency: 'med', source: 'phone', appointment: '', notes: 'ניסתה כבר כל מיני פתרונות', createdAt: new Date(Date.now() - 86400000).toISOString(), timeline: [{ text: 'דיברנו בטלפון, מעוניינת בהצעת מחיר', time: new Date(Date.now() - 3600000*5).toISOString() }] },
+      { id: genId(), name: 'יוסי אברהם', phone: '050-5554433', pest: 'עכברים', area: 'פתח תקווה', status: 'scheduled', urgency: 'high', source: 'whatsapp', appointment: new Date(Date.now() + 86400000).toISOString().slice(0,16), notes: 'בית פרטי, מרתף נגוע', createdAt: new Date(Date.now() - 86400000*3).toISOString(), timeline: [] },
+    ];
+    saveLeads();
+  }
+
+  renderAll();
+  checkFollowUps();
+});
+
+function genId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+// ===== RENDER =====
+function renderAll() {
+  renderStats();
+  renderPipeline();
+  renderTable();
+  renderSelects();
+  renderToday();
+}
+
+function renderStats() {
+  document.getElementById('statTotal').textContent = leads.length;
+  document.getElementById('statNew').textContent = leads.filter(l => l.status === 'new').length;
+  document.getElementById('statScheduled').textContent = leads.filter(l => l.status === 'scheduled').length;
+  document.getElementById('statDone').textContent = leads.filter(l => l.status === 'done').length;
+  const followupNeeded = leads.filter(l => ['new','contacted'].includes(l.status)).length;
+  document.getElementById('statFollowup').textContent = followupNeeded;
+}
+
+function renderTable() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const filterStatus = document.getElementById('filterStatus').value;
+  const filterPest = document.getElementById('filterPest').value;
+
+  let filtered = leads.filter(l => {
+    const matchSearch = !search || l.name.toLowerCase().includes(search) || l.phone.includes(search) || (l.pest||'').includes(search);
+    const matchStatus = !filterStatus || l.status === filterStatus;
+    const matchPest = !filterPest || l.pest === filterPest;
+    return matchSearch && matchStatus && matchPest;
+  });
+
+  const tbody = document.getElementById('leadsTableBody');
+  const empty = document.getElementById('emptyState');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // Sort: new first, then by date desc
+  filtered.sort((a,b) => {
+    const order = {new:0,contacted:1,scheduled:2,done:3,irrelevant:4};
+    if (order[a.status] !== order[b.status]) return order[a.status] - order[b.status];
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  tbody.innerHTML = filtered.map(l => {
+    const next = nextStep(l.status);
+    const nextBtn = next
+      ? `<button class="btn btn-next btn-sm" onclick="advanceStatus('${l.id}')" title="${next.label}">${next.label} →</button>`
+      : '';
+    const closeDealBtn = l.status === 'scheduled'
+      ? `<button class="btn btn-close-deal btn-sm" onclick="closeDeal('${l.id}')">✅ סגור עסקה!</button>`
+      : '';
+    return `
+    <tr>
+      <td data-label="שם"><strong>${l.name}</strong>${l.urgency==='high' ? ' 🔴' : ''}</td>
+      <td data-label="טלפון"><a href="tel:${l.phone}" style="color:#1565c0; text-decoration:none">${l.phone}</a></td>
+      <td data-label="מזיק">${l.pest || '—'}</td>
+      <td data-label="אזור">${l.area || '—'}</td>
+      <td data-label="סטטוס">${statusBadge(l.status)}</td>
+      <td data-label="תאריך" style="font-size:12px; color:#666">${formatDate(l.createdAt)}</td>
+      <td data-label="">
+        <div class="td-actions">
+          ${closeDealBtn}
+          ${nextBtn}
+          <button class="btn btn-whatsapp btn-sm" onclick="quickWhatsApp('${l.id}')" title="WhatsApp">💬</button>
+          <button class="btn btn-blue btn-sm" onclick="openDetail('${l.id}')" title="פרטים">👁</button>
+          <button class="btn btn-primary btn-sm" onclick="openEditModal('${l.id}')" title="עריכה">✏️</button>
+          <button class="btn btn-red btn-sm" onclick="deleteLead('${l.id}')" title="מחק">🗑</button>
+        </div>
+      </td>
+    </tr>
+  `;
+  }).join('');
+}
+
+function renderSelects() {
+  const options = leads.map(l => `<option value="${l.id}">${l.name} — ${l.pest||'?'} (${statusText(l.status)})</option>`).join('');
+  document.getElementById('aiLeadSelect').innerHTML = '<option value="">— בחר ליד —</option>' + options;
+  document.getElementById('noteLeadSelect').innerHTML = '<option value="">— בחר ליד —</option>' + options;
+}
+
+function renderToday() {
+  const today = new Date().toDateString();
+  const todayLeads = leads.filter(l => l.appointment && new Date(l.appointment).toDateString() === today);
+  const box = document.getElementById('todayAppointments');
+  if (todayLeads.length === 0) {
+    box.innerHTML = '<div style="color:#aaa;font-size:13px;text-align:center;padding:20px">אין פגישות היום</div>';
+    return;
+  }
+  box.innerHTML = todayLeads.map(l => `
+    <div style="border-bottom:1px solid #f0f4f8;padding:10px 0;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-weight:600;font-size:14px">${l.name}</div>
+        <div style="font-size:12px;color:#666">${l.pest||''} • ${l.area||''}</div>
+        <div style="font-size:12px;color:#1565c0">${formatTime(l.appointment)}</div>
+      </div>
+      <button class="btn btn-whatsapp btn-sm" onclick="quickWhatsApp('${l.id}')">💬</button>
+    </div>
+  `).join('');
+}
+
+// ===== STATUS HELPERS =====
+function statusBadge(s) {
+  const map = { new:'badge-new', contacted:'badge-contacted', scheduled:'badge-scheduled', done:'badge-done', irrelevant:'badge-irrelevant' };
+  return `<span class="badge ${map[s]||''}">${statusText(s)}</span>`;
+}
+function statusText(s) {
+  return { new:'חדש', contacted:'יצרנו קשר', scheduled:'נקבעה פגישה', done:'בוצע', irrelevant:'לא רלוונטי' }[s] || s;
+}
+function formatDate(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('he-IL', { day:'2-digit', month:'2-digit', year:'2-digit' });
+}
+function formatTime(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleTimeString('he-IL', { hour:'2-digit', minute:'2-digit' });
+}
+
+// ===== MODAL: ADD/EDIT =====
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = 'הוסף ליד חדש';
+  document.getElementById('editLeadId').value = '';
+  ['fName','fPhone','fArea','fNotes','fAppointment'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fPest').value = '';
+  document.getElementById('fStatus').value = 'new';
+  document.getElementById('fUrgency').value = 'med';
+  document.getElementById('fSource').value = 'website';
+  document.getElementById('leadModal').classList.add('open');
+}
+function openEditModal(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  document.getElementById('modalTitle').textContent = 'עריכת ליד';
+  document.getElementById('editLeadId').value = id;
+  document.getElementById('fName').value = l.name || '';
+  document.getElementById('fPhone').value = l.phone || '';
+  document.getElementById('fPest').value = l.pest || '';
+  document.getElementById('fArea').value = l.area || '';
+  document.getElementById('fStatus').value = l.status || 'new';
+  document.getElementById('fUrgency').value = l.urgency || 'med';
+  document.getElementById('fSource').value = l.source || 'website';
+  document.getElementById('fAppointment').value = l.appointment || '';
+  document.getElementById('fNotes').value = l.notes || '';
+  document.getElementById('leadModal').classList.add('open');
+}
+function closeModal() { document.getElementById('leadModal').classList.remove('open'); }
+
+function saveLead() {
+  const name = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  if (!name || !phone) { showToast('נא למלא שם וטלפון'); return; }
+
+  const id = document.getElementById('editLeadId').value;
+  const data = {
+    name, phone,
+    pest: document.getElementById('fPest').value,
+    area: document.getElementById('fArea').value.trim(),
+    status: document.getElementById('fStatus').value,
+    urgency: document.getElementById('fUrgency').value,
+    source: document.getElementById('fSource').value,
+    appointment: document.getElementById('fAppointment').value,
+    notes: document.getElementById('fNotes').value.trim(),
+  };
+
+  if (id) {
+    const idx = leads.findIndex(x => x.id === id);
+    leads[idx] = { ...leads[idx], ...data };
+    showToast('הליד עודכן בהצלחה ✓');
+  } else {
+    leads.unshift({ id: genId(), ...data, createdAt: new Date().toISOString(), timeline: [] });
+    showToast('ליד חדש נוסף ✓');
+  }
+  saveLeads();
+  closeModal();
+  renderAll();
+}
+
+function deleteLead(id) {
+  if (!confirm('למחוק את הליד?')) return;
+  leads = leads.filter(l => l.id !== id);
+  saveLeads();
+  renderAll();
+  showToast('הליד נמחק');
+}
+
+// ===== DETAIL MODAL =====
+function openDetail(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  document.getElementById('detailTitle').textContent = `${l.name} — פרטי ליד`;
+
+  const notes = (l.timeline || []).map(t => `
+    <div class="note-item">
+      <div class="note-meta">${new Date(t.time).toLocaleString('he-IL')}</div>
+      ${t.text}
+    </div>
+  `).join('') || '<div style="color:#aaa;font-size:13px">אין הערות עדיין</div>';
+
+  const pipelineSteps = [
+    { key:'new', icon:'🆕', label:'חדש' },
+    { key:'contacted', icon:'📞', label:'יצרנו קשר' },
+    { key:'scheduled', icon:'📅', label:'נקבעה פגישה' },
+    { key:'done', icon:'✅', label:'עסקה סגורה' },
+  ];
+  const stepOrder = ['new','contacted','scheduled','done'];
+  const currentIdx = stepOrder.indexOf(l.status);
+  const pipelineHtml = pipelineSteps.map((s, i) => {
+    let cls = '';
+    if (i < currentIdx) cls = 'ps-done-past';
+    else if (i === currentIdx) cls = 'ps-current';
+    return `<div class="ps-step ${cls}"><div class="ps-icon">${s.icon}</div>${s.label}</div>`;
+  }).join('');
+
+  const next = nextStep(l.status);
+  const mainActionBtn = l.status === 'done'
+    ? `<div style="background:#e8f5e9;border:2px solid #2d7d32;border-radius:10px;padding:14px;text-align:center;margin-bottom:16px">
+        <div style="font-size:24px">🎉</div>
+        <div style="font-weight:700;color:#2d7d32;font-size:16px">עסקה סגורה!</div>
+       </div>`
+    : l.status === 'irrelevant'
+    ? `<div style="background:#ffebee;border:2px solid #c62828;border-radius:10px;padding:12px;text-align:center;margin-bottom:16px;color:#c62828;font-weight:600">לא רלוונטי</div>`
+    : l.status === 'scheduled'
+    ? `<button class="btn btn-close-deal" onclick="closeDeal('${l.id}')" style="width:100%;font-size:16px;padding:14px;margin-bottom:16px;border-radius:10px">
+        ✅ סגור עסקה!
+       </button>`
+    : next
+    ? `<button class="btn btn-next" onclick="advanceStatus('${l.id}')" style="width:100%;font-size:14px;padding:12px;margin-bottom:16px;border-radius:10px">
+        הצעד הבא: ${next.label} →
+       </button>`
+    : '';
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="pipeline-steps">${pipelineHtml}</div>
+    ${mainActionBtn}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;font-size:13px">
+      <div>📞 <a href="tel:${l.phone}" style="color:#1565c0">${l.phone}</a></div>
+      <div>🦟 ${l.pest||'—'}</div>
+      <div>📍 ${l.area||'—'}</div>
+      <div>⚡ <span class="urgency-${l.urgency||'low'}">${{low:'נמוכה',med:'בינונית',high:'גבוהה'}[l.urgency]||'—'}</span></div>
+      ${l.appointment ? `<div style="grid-column:1/-1">📅 פגישה: <strong>${new Date(l.appointment).toLocaleString('he-IL')}</strong></div>` : ''}
+      ${l.notes ? `<div style="grid-column:1/-1">📝 ${l.notes}</div>` : ''}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <button class="btn btn-whatsapp btn-sm" onclick="quickWhatsApp('${l.id}')">💬 WhatsApp</button>
+      <button class="btn btn-sm" style="background:#e3f2fd;color:#1565c0" onclick="updateStatus('${l.id}','contacted')">📞 יצרנו קשר</button>
+      <button class="btn btn-sm" style="background:#e8f5e9;color:#2d7d32" onclick="updateStatus('${l.id}','scheduled')">📅 נקבעה פגישה</button>
+      <button class="btn btn-sm" style="background:#ffebee;color:#c62828" onclick="updateStatus('${l.id}','irrelevant')">✖ לא רלוונטי</button>
+    </div>
+    <div style="margin-bottom:8px;font-weight:600;font-size:13px">היסטוריה:</div>
+    <div class="notes-list">${notes}</div>
+  `;
+
+  document.getElementById('detailModal').classList.add('open');
+}
+function closeDetailModal() { document.getElementById('detailModal').classList.remove('open'); }
+
+function updateStatus(id, status) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  l.status = status;
+  l.timeline = l.timeline || [];
+  l.timeline.push({ text: `סטטוס שונה ל: ${statusText(status)}`, time: new Date().toISOString() });
+  saveLeads();
+  renderAll();
+  closeDetailModal();
+  showToast(`סטטוס עודכן: ${statusText(status)}`);
+}
+
+// One-click advance to next step
+function nextStep(status) {
+  const flow = { new: {key:'contacted', label:'יצרנו קשר'}, contacted: {key:'scheduled', label:'נקבעה פגישה'} };
+  return flow[status] || null;
+}
+
+function advanceStatus(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  const next = nextStep(l.status);
+  if (!next) return;
+  l.status = next.key;
+  l.timeline = l.timeline || [];
+  l.timeline.push({ text: `סטטוס שונה ל: ${next.label}`, time: new Date().toISOString() });
+  saveLeads();
+  renderAll();
+  closeDetailModal();
+  showToast(`✓ ${l.name} — ${next.label}`);
+}
+
+function closeDeal(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  l.status = 'done';
+  l.timeline = l.timeline || [];
+  l.timeline.push({ text: '🎉 עסקה נסגרה!', time: new Date().toISOString() });
+  saveLeads();
+  renderAll();
+  closeDetailModal();
+  showToast(`🎉 כל הכבוד! עסקה נסגרה עם ${l.name}`);
+}
+
+function filterByStatus(status) {
+  const sel = document.getElementById('filterStatus');
+  sel.value = sel.value === status ? '' : status;
+  renderTable();
+}
+
+function renderPipeline() {
+  ['new','contacted','scheduled','done'].forEach(s => {
+    const count = leads.filter(l => l.status === s).length;
+    const el = document.getElementById(`pipeNum-${s}`);
+    if (el) el.textContent = count;
+  });
+}
+
+// ===== NOTES =====
+function addNote() {
+  const id = document.getElementById('noteLeadSelect').value;
+  const text = document.getElementById('noteText').value.trim();
+  if (!id || !text) { showToast('בחר ליד וכתוב הערה'); return; }
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  l.timeline = l.timeline || [];
+  l.timeline.push({ text, time: new Date().toISOString() });
+  saveLeads();
+  document.getElementById('noteText').value = '';
+  showToast('הערה נשמרה ✓');
+}
+
+// ===== AI MESSAGE =====
+function onAiLeadSelect() {
+  const id = document.getElementById('aiLeadSelect').value;
+  currentAiLead = leads.find(l => l.id === id) || null;
+}
+
+async function generateAIMessage() {
+  if (!currentAiLead) { showToast('בחר ליד קודם'); return; }
+  const msgType = document.getElementById('aiMsgType').value;
+  const resultBox = document.getElementById('aiResultBox');
+  const msgText = document.getElementById('aiMessageText');
+
+  resultBox.style.display = 'block';
+  msgText.textContent = 'יוצר הודעה...';
+  msgText.className = 'ai-message-box loading';
+
+  const prompts = {
+    followup_new: `כתוב הודעת WhatsApp קצרה ומקצועית בעברית מ"${BUSINESS_NAME}" (${OWNER_NAME}) ללקוח בשם ${currentAiLead.name} שפנה אבל לא ענה. הם פנו בנושא: ${currentAiLead.pest||'הדברה'}. ההודעה תהיה חברותית, קצרה (2-3 שורות), תזכיר שפנו אלינו ותציע לקבוע זמן נוח. אל תכלול כוכביות, markdown, או קישורים.`,
+    followup_after: `כתוב הודעת WhatsApp בעברית מ"${BUSINESS_NAME}" (${OWNER_NAME}) ללקוח ${currentAiLead.name} אחרי שיחה ראשונה. נושא: ${currentAiLead.pest||'הדברה'}, אזור: ${currentAiLead.area||'לא צוין'}. 2-3 שורות, תוודא שיש להם את כל הפרטים ותציע לקבוע פגישה. ללא markdown.`,
+    reminder_before: `כתוב תזכורת WhatsApp בעברית מ"${BUSINESS_NAME}" (${OWNER_NAME}) ל${currentAiLead.name} לפני טיפול הדברת ${currentAiLead.pest||'מזיקים'}. כלול הוראות הכנה (לפנות ארונות מטבח, לסלק בע"ח). 3-4 שורות. ללא markdown.`,
+    after_treatment: `כתוב הודעת WhatsApp בעברית מ"${BUSINESS_NAME}" (${OWNER_NAME}) ל${currentAiLead.name} אחרי טיפול הדברה. תשאל אם הכל בסדר, תציין שישלחו ביקורת ב-Google אם שבעי רצון. חברותי וקצר. ללא markdown.`,
+    reactivate: `כתוב הודעת WhatsApp בעברית מ"${BUSINESS_NAME}" (${OWNER_NAME}) ל${currentAiLead.name} שפנה לפני זמן מה בנושא ${currentAiLead.pest||'הדברה'} ולא הגיע לסגירה. הצע מחיר מיוחד או שירות מהיר. חברותי, 2-3 שורות. ללא markdown.`
+  };
+
+  try {
+    const response = await fetch(`${RAILWAY_SERVER}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: prompts[msgType] }]
+      })
+    });
+
+    if (!response.ok) throw new Error('שגיאה בשרת');
+    const data = await response.json();
+    const text = data.content?.[0]?.text || data.message || 'שגיאה ביצירת הודעה';
+
+    msgText.textContent = text.trim();
+    msgText.className = 'ai-message-box';
+
+    // Store phone for WhatsApp
+    document.getElementById('waSendBtn').dataset.phone = currentAiLead.phone.replace(/\D/g,'');
+    document.getElementById('waSendBtn').dataset.msg = encodeURIComponent(text.trim());
+
+  } catch (err) {
+    msgText.textContent = 'שגיאה: לא ניתן להתחבר לשרת. בדוק חיבור לאינטרנט.';
+    msgText.className = 'ai-message-box';
+  }
+}
+
+function sendViaWhatsApp() {
+  const btn = document.getElementById('waSendBtn');
+  let phone = btn.dataset.phone || '';
+  const msg = btn.dataset.msg || '';
+  if (!phone || !msg) { showToast('צור הודעה קודם'); return; }
+  // Normalize Israeli phone
+  if (phone.startsWith('0')) phone = '972' + phone.slice(1);
+  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+}
+
+function copyMessage() {
+  const text = document.getElementById('aiMessageText').textContent;
+  navigator.clipboard.writeText(text).then(() => showToast('הודעה הועתקה ✓'));
+}
+
+// ===== QUICK WHATSAPP =====
+function quickWhatsApp(id) {
+  const l = leads.find(x => x.id === id);
+  if (!l) return;
+  let phone = l.phone.replace(/\D/g,'');
+  if (phone.startsWith('0')) phone = '972' + phone.slice(1);
+  window.open(`https://wa.me/${phone}`, '_blank');
+}
+
+// ===== FOLLOW-UP CHECK =====
+function checkFollowUps() {
+  const now = Date.now();
+  const overdueLeads = leads.filter(l => {
+    if (!['new','contacted'].includes(l.status)) return false;
+    const age = (now - new Date(l.createdAt).getTime()) / 3600000;
+    return age > 24;
+  });
+  if (overdueLeads.length > 0) {
+    showToast(`⚠️ ${overdueLeads.length} לידים ממתינים לפולואפ מעל 24 שעות`);
+  }
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeDetailModal(); }
+});
+</script>
+</body>
+</html>
