@@ -4,375 +4,597 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אביה הדברות — פתרונות הדברה לעסקים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --dark: #0f1923;
-  --dark2: #1a2e44;
-  --green: #16a34a;
-  --green2: #dcfce7;
-  --gold: #d97706;
-  --gold2: #fef3c7;
-  --border: #e2e8f0;
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --muted: #64748b;
-  --white: #fff;
-  --radius: 12px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --ink:     #0a0f1e;
+  --ink2:    #1e293b;
+  --green:   #16a34a;
+  --green-h: #15803d;
+  --green-s: #dcfce7;
+  --accent:  #22c55e;
+  --gold:    #f59e0b;
+  --slate:   #64748b;
+  --border:  #e2e8f0;
+  --bg:      #f8fafc;
+  --white:   #ffffff;
+  --r:       14px;
+  --r-lg:    20px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; color: var(--text); direction: rtl; line-height: 1.6; }
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; }
-
-/* ── NAV ── */
-nav {
-  background: var(--dark); color: white;
-  padding: 14px 40px; display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  color: var(--ink); background: var(--white); direction: rtl;
+  -webkit-font-smoothing: antialiased;
 }
-.nav-brand { display: flex; align-items: center; gap: 10px; }
-.nav-brand .icon { font-size: 28px; }
-.nav-brand h1 { font-size: 18px; font-weight: 800; }
-.nav-brand p { font-size: 11px; color: rgba(255,255,255,0.5); }
-.nav-cta { background: var(--green); color: white; padding: 9px 20px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; border: none; font-family: inherit; transition: background 0.2s; }
-.nav-cta:hover { background: #15803d; }
+a { text-decoration: none; color: inherit; }
 
-/* ── HERO ── */
+/* ────────── NAV ────────── */
+.nav {
+  position: fixed; top: 0; inset-inline: 0; z-index: 900;
+  padding: 0 48px;
+  background: rgba(10,15,30,0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; height: 68px;
+  transition: background 0.3s;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-logo { width: 38px; height: 38px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.nav-name { font-size: 16px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+.nav-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; font-weight: 500; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.nav-links a:hover { color: white; }
+.nav-cta {
+  background: var(--green); color: white; border: none; cursor: pointer;
+  padding: 10px 22px; border-radius: 9px; font-size: 13px; font-weight: 700;
+  font-family: inherit; transition: all 0.2s; white-space: nowrap;
+}
+.nav-cta:hover { background: var(--green-h); box-shadow: 0 4px 16px rgba(22,163,74,0.4); }
+
+/* ────────── HERO ────────── */
 .hero {
-  background: linear-gradient(135deg, var(--dark) 0%, #1a3a1a 100%);
-  color: white; padding: 80px 40px; text-align: center; position: relative; overflow: hidden;
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--ink);
+  position: relative; overflow: hidden; padding: 120px 48px 80px;
 }
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+.hero-bg {
+  position: absolute; inset: 0; overflow: hidden;
 }
-.hero-tag {
-  display: inline-block; background: rgba(22,163,74,0.2); border: 1px solid rgba(22,163,74,0.4);
-  color: #4ade80; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;
-  margin-bottom: 20px; letter-spacing: 0.5px;
+.hero-glow {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); opacity: 0.15;
 }
-.hero h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
-.hero h2 span { color: #4ade80; }
-.hero p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 32px; }
-.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-hero-main { background: var(--green); color: white; padding: 14px 32px; border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer; border: none; font-family: inherit; transition: all 0.2s; }
-.btn-hero-main:hover { background: #15803d; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,163,74,0.4); }
-.btn-hero-sec { background: rgba(255,255,255,0.1); color: white; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); font-family: inherit; transition: all 0.2s; }
-.btn-hero-sec:hover { background: rgba(255,255,255,0.15); }
+.hero-glow-1 { width: 600px; height: 600px; background: var(--green); top: -200px; right: -100px; }
+.hero-glow-2 { width: 400px; height: 400px; background: #2563eb; bottom: -100px; left: 100px; }
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(22,163,74,0.12); border: 1px solid rgba(22,163,74,0.3);
+  color: #4ade80; padding: 6px 14px; border-radius: 30px;
+  font-size: 12px; font-weight: 700; margin-bottom: 28px; letter-spacing: 0.4px;
+}
+.hero-badge .pulse {
+  width: 7px; height: 7px; background: #4ade80; border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+.hero h1 {
+  font-size: clamp(36px, 5.5vw, 60px); font-weight: 900; color: white;
+  line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p {
+  font-size: 17px; color: rgba(255,255,255,0.6); max-width: 520px;
+  line-height: 1.7; margin-bottom: 36px; font-weight: 400;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-hero {
+  padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 700;
+  font-family: inherit; cursor: pointer; border: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-hero-primary { background: var(--green); color: white; }
+.btn-hero-primary:hover { background: var(--green-h); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(22,163,74,0.4); }
+.btn-hero-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.2); }
+.btn-hero-outline:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+.hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+.hs { }
+.hs-num { font-size: 28px; font-weight: 900; color: white; letter-spacing: -1px; }
+.hs-num span { color: var(--accent); }
+.hs-label { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; margin-top: 2px; }
 
-/* ── TRUST BAR ── */
-.trust-bar {
-  background: var(--gold2); border-bottom: 1px solid #fde68a;
-  padding: 14px 40px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+/* ────────── TRUST BAR ────────── */
+.trust {
+  background: var(--ink2); border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 18px 48px; display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
 }
-.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #92400e; }
-.trust-item .ti { font-size: 18px; }
+.trust-item {
+  display: flex; align-items: center; gap: 9px; padding: 8px 28px;
+  border-left: 1px solid rgba(255,255,255,0.08); font-size: 13px;
+  font-weight: 600; color: rgba(255,255,255,0.65);
+}
+.trust-item:last-child { border-left: none; }
+.trust-icon { font-size: 16px; }
 
-/* ── SECTION ── */
-section { padding: 64px 40px; }
-.section-center { text-align: center; max-width: 640px; margin: 0 auto 48px; }
-.section-tag { display: inline-block; background: var(--green2); color: var(--green); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 10px; letter-spacing: 0.5px; }
-.section-title { font-size: clamp(22px, 4vw, 34px); font-weight: 900; margin-bottom: 12px; }
-.section-sub { font-size: 15px; color: var(--muted); }
+/* ────────── SECTION BASE ────────── */
+.sec { padding: 96px 48px; }
+.sec-alt { background: var(--bg); }
+.sec-dark { background: var(--ink); }
+.sec-center { text-align: center; max-width: 620px; margin: 0 auto 56px; }
+.label-tag {
+  display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--green); margin-bottom: 12px;
+}
+.sec-title { font-size: clamp(26px, 4vw, 40px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 14px; }
+.sec-sub { font-size: 15px; color: var(--slate); line-height: 1.7; }
+.sec-dark .sec-title { color: white; }
+.sec-dark .sec-sub { color: rgba(255,255,255,0.5); }
+.sec-dark .label-tag { color: #4ade80; }
 
-/* ── BUSINESS TYPES ── */
-.biz-types { background: var(--bg); }
-.biz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto; }
+/* ────────── BIZ TYPES ────────── */
+.biz-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px; max-width: 1000px; margin: 0 auto;
+}
 .biz-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 20px 16px; text-align: center; cursor: pointer;
-  transition: all 0.2s; box-shadow: var(--shadow);
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 22px 14px; text-align: center;
+  cursor: pointer; transition: all 0.22s; position: relative;
 }
-.biz-card:hover, .biz-card.selected {
-  border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
-  transform: translateY(-2px);
+.biz-card::after {
+  content: ''; position: absolute; inset: 0; border-radius: var(--r);
+  border: 2px solid var(--green); opacity: 0; transition: opacity 0.2s;
 }
-.biz-card.selected { background: var(--green2); }
-.biz-icon { font-size: 36px; margin-bottom: 10px; }
-.biz-name { font-size: 13px; font-weight: 700; }
-.biz-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.biz-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+.biz-card:hover::after, .biz-card.sel::after { opacity: 1; }
+.biz-card.sel { background: var(--green-s); }
+.biz-card .ic { font-size: 34px; margin-bottom: 10px; display: block; }
+.biz-card .nm { font-size: 13px; font-weight: 700; }
+.biz-card .sm { font-size: 11px; color: var(--slate); margin-top: 3px; }
 
-/* ── WHY US ── */
-.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
-.why-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-.why-icon { font-size: 32px; margin-bottom: 12px; }
+/* ────────── WHY ────────── */
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1080px; margin: 0 auto; }
+.why-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 28px; transition: all 0.22s; position: relative; overflow: hidden;
+}
+.why-card::before {
+  content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px;
+  background: var(--green); transform: scaleX(0); transform-origin: right;
+  transition: transform 0.3s;
+}
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.why-card:hover::before { transform: scaleX(1); }
+.why-ico { width: 48px; height: 48px; background: var(--green-s); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
 .why-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
-.why-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.why-body { font-size: 13px; color: var(--slate); line-height: 1.7; }
 
-/* ── PROPOSAL GENERATOR ── */
-.proposal-section { background: var(--dark); color: white; }
-.proposal-section .section-title { color: white; }
-.proposal-section .section-sub { color: rgba(255,255,255,0.6); }
-.proposal-section .section-tag { background: rgba(22,163,74,0.2); color: #4ade80; }
-.proposal-wrap { max-width: 760px; margin: 0 auto; }
-.proposal-form { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px; margin-bottom: 20px; }
-.p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.p-group { display: flex; flex-direction: column; gap: 5px; }
-.p-group.full { grid-column: 1 / -1; }
-.p-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
-.p-input {
-  padding: 10px 13px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px; color: white; font-size: 13px; font-family: inherit; direction: rtl;
-  transition: border-color 0.2s;
+/* ────────── PROPOSAL ────────── */
+.proposal-wrap { max-width: 800px; margin: 0 auto; }
+.p-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px); border-radius: var(--r-lg); padding: 32px; margin-bottom: 16px;
 }
-.p-input:focus { outline: none; border-color: #4ade80; background: rgba(255,255,255,0.12); }
-.p-input option { background: var(--dark2); color: white; }
-.btn-generate {
-  width: 100%; padding: 14px; background: var(--green); color: white; border: none;
-  border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit;
-  transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+.p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.p-full { grid-column: 1 / -1; }
+.p-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 6px; }
+.p-inp {
+  width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 9px;
+  color: white; font-size: 14px; font-family: inherit; direction: rtl;
+  transition: all 0.2s;
 }
-.btn-generate:hover { background: #15803d; }
-.btn-generate:disabled { background: #374151; color: #6b7280; cursor: not-allowed; }
+.p-inp::placeholder { color: rgba(255,255,255,0.25); }
+.p-inp:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.1); box-shadow: 0 0 0 3px rgba(34,197,94,0.15); }
+.p-inp option { background: #1e293b; color: white; }
+.btn-gen {
+  width: 100%; padding: 16px; background: var(--green); color: white; border: none;
+  border-radius: 11px; font-size: 15px; font-weight: 800; cursor: pointer;
+  font-family: inherit; transition: all 0.2s; display: flex; align-items: center;
+  justify-content: center; gap: 10px; letter-spacing: -0.2px;
+}
+.btn-gen:hover:not(:disabled) { background: var(--green-h); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(22,163,74,0.45); }
+.btn-gen:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* ── PROPOSAL OUTPUT ── */
-.proposal-out {
-  background: white; color: var(--text); border-radius: 14px; overflow: hidden;
-  box-shadow: var(--shadow-lg); display: none;
+/* PROPOSAL OUTPUT */
+.p-out {
+  display: none; background: var(--white); border-radius: var(--r-lg);
+  overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  margin-top: 20px;
 }
-.po-header {
-  background: var(--dark); color: white; padding: 24px 28px;
-  display: flex; align-items: center; justify-content: space-between;
+.p-out-head {
+  background: var(--ink); padding: 24px 28px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.po-header h3 { font-size: 18px; font-weight: 800; }
-.po-header p { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 3px; }
-.po-body { padding: 24px 28px; }
-.po-section { margin-bottom: 20px; }
-.po-section h4 { font-size: 13px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-.po-text { font-size: 14px; line-height: 1.8; white-space: pre-wrap; }
-.po-footer {
-  background: var(--green2); border-top: 1px solid #bbf7d0;
-  padding: 16px 28px; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;
+.p-out-head-title { font-size: 17px; font-weight: 800; color: white; }
+.p-out-head-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+.p-out-date { font-size: 11px; color: rgba(255,255,255,0.35); text-align: left; }
+.p-out-body { padding: 28px; }
+.p-out-text { font-size: 14px; line-height: 1.85; color: var(--ink); white-space: pre-wrap; }
+.p-out-text.loading::after { content: ''; animation: ld 1s infinite; }
+@keyframes ld { 0%{content:'▋'} 50%{content:' '} }
+.p-out-foot {
+  padding: 16px 28px; background: var(--bg); border-top: 1px solid var(--border);
+  display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;
 }
-.btn-action { padding: 9px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; border: none; transition: all 0.2s; }
-.btn-wa { background: #16a34a; color: white; }
-.btn-wa:hover { background: #15803d; }
-.btn-copy { background: var(--white); color: var(--text); border: 1px solid var(--border); }
-.btn-copy:hover { background: var(--bg); }
-.btn-print { background: var(--dark); color: white; }
-.btn-print:hover { background: var(--dark2); }
-.loading-dots::after { content: ''; animation: dots 1.2s infinite; }
-@keyframes dots { 0%{content:'.'} 33%{content:'..'} 66%{content:'...'} }
+.btn-act {
+  padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: inherit; border: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-green { background: var(--green); color: white; }
+.btn-green:hover { background: var(--green-h); }
+.btn-outline { background: white; color: var(--ink2); border: 1px solid var(--border); }
+.btn-outline:hover { background: var(--bg); }
+.btn-dark { background: var(--ink); color: white; }
+.btn-dark:hover { background: var(--ink2); }
 
-/* ── PACKAGES ── */
-.packages { background: var(--bg); }
-.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 860px; margin: 0 auto; }
+/* ────────── PACKAGES ────────── */
+.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 920px; margin: 0 auto; }
 .pkg {
-  background: var(--white); border: 2px solid var(--border); border-radius: 14px;
-  padding: 28px 24px; position: relative; transition: all 0.2s;
+  background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r-lg);
+  padding: 32px 28px; transition: all 0.25s; position: relative;
 }
-.pkg:hover { border-color: var(--green); box-shadow: var(--shadow-lg); }
-.pkg.featured { border-color: var(--green); }
-.pkg-tag-top { position: absolute; top: -12px; right: 50%; transform: translateX(50%); background: var(--green); color: white; padding: 3px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; }
-.pkg-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-.pkg-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
-.pkg-price { font-size: 28px; font-weight: 900; color: var(--green); margin-bottom: 4px; }
-.pkg-price span { font-size: 14px; color: var(--muted); font-weight: 400; }
-.pkg-period { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
-.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.pkg-features li { font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
-.pkg-features li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; }
+.pkg:hover { box-shadow: 0 20px 48px rgba(0,0,0,0.1); transform: translateY(-4px); }
+.pkg.featured { border-color: var(--green); background: linear-gradient(160deg, #f0fdf4 0%, white 60%); }
+.pkg-chip {
+  position: absolute; top: -13px; right: 50%; transform: translateX(50%);
+  background: var(--green); color: white; padding: 3px 16px; border-radius: 20px;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.3px;
+}
+.pkg-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+.pkg-name { font-size: 20px; font-weight: 900; letter-spacing: -0.4px; margin-bottom: 4px; }
+.pkg-desc { font-size: 13px; color: var(--slate); margin-bottom: 20px; }
+.pkg-divider { height: 1px; background: var(--border); margin: 16px 0; }
+.pkg-price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+.pkg-price { font-size: 34px; font-weight: 900; color: var(--green); letter-spacing: -1.5px; }
+.pkg-per { font-size: 14px; color: var(--slate); font-weight: 500; }
+.pkg-period { font-size: 12px; color: var(--slate); margin-bottom: 24px; }
+.pkg-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pkg-list li { font-size: 13px; display: flex; align-items: flex-start; gap: 9px; line-height: 1.4; }
+.pkg-list li .ck { color: var(--green); font-weight: 800; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 
-/* ── CTA ── */
-.cta-section { background: linear-gradient(135deg, var(--green) 0%, #15803d 100%); color: white; text-align: center; padding: 64px 40px; }
-.cta-section h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin-bottom: 12px; }
-.cta-section p { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 28px; }
-.btn-cta-white { background: white; color: var(--green); padding: 14px 36px; border-radius: 10px; font-weight: 800; font-size: 15px; cursor: pointer; border: none; font-family: inherit; transition: all 0.2s; }
-.btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+/* ────────── PROCESS ────────── */
+.process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; max-width: 900px; margin: 0 auto; position: relative; }
+.process-grid::before { content: ''; position: absolute; top: 28px; inset-inline: 0; height: 1px; background: var(--border); }
+.step { text-align: center; padding: 0 20px; position: relative; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%; background: white; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+  font-size: 20px; font-weight: 900; color: var(--green); position: relative; z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.step-title { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.step-body { font-size: 12px; color: var(--slate); line-height: 1.6; }
 
-/* ── CONTACT FORM ── */
-.contact-section { padding: 64px 40px; }
-.contact-wrap { max-width: 560px; margin: 0 auto; }
-.c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.c-group { display: flex; flex-direction: column; gap: 5px; }
-.c-group.full { grid-column: 1 / -1; }
-.c-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
-.c-input { padding: 10px 13px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; direction: rtl; transition: border-color 0.2s; }
-.c-input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,0.12); }
-.btn-submit { width: 100%; padding: 13px; background: var(--green); color: white; border: none; border-radius: 9px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; transition: background 0.2s; margin-top: 4px; }
-.btn-submit:hover { background: #15803d; }
+/* ────────── CTA ────────── */
+.cta-sec {
+  background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #052e16 100%);
+  padding: 96px 48px; text-align: center; position: relative; overflow: hidden;
+}
+.cta-sec::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(34,197,94,0.15) 0%, transparent 70%);
+}
+.cta-sec h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: white; letter-spacing: -1px; margin-bottom: 14px; position: relative; }
+.cta-sec p { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 32px; position: relative; }
+.btn-cta {
+  padding: 16px 40px; background: white; color: var(--green); border: none;
+  border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer;
+  font-family: inherit; transition: all 0.2s; position: relative;
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+.cta-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 14px; position: relative; }
 
-/* ── FOOTER ── */
-footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 28px 40px; text-align: center; font-size: 13px; }
-footer strong { color: rgba(255,255,255,0.8); }
+/* ────────── CONTACT ────────── */
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 1000px; margin: 0 auto; align-items: start; }
+.contact-info h3 { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 14px; }
+.contact-info p { font-size: 14px; color: var(--slate); line-height: 1.7; margin-bottom: 28px; }
+.contact-items { display: flex; flex-direction: column; gap: 14px; }
+.ci { display: flex; align-items: center; gap: 14px; }
+.ci-icon { width: 42px; height: 42px; background: var(--green-s); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.ci-title { font-size: 12px; color: var(--slate); font-weight: 600; }
+.ci-val { font-size: 14px; font-weight: 700; }
+.contact-form-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+.cf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cf-full { grid-column: 1 / -1; }
+.cf-label { font-size: 11px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+.cf-inp {
+  width: 100%; padding: 11px 13px; border: 1.5px solid var(--border); border-radius: 9px;
+  font-size: 14px; font-family: inherit; direction: rtl; transition: all 0.2s; color: var(--ink);
+  background: var(--white);
+}
+.cf-inp:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+.cf-inp::placeholder { color: #cbd5e1; }
+.btn-submit {
+  width: 100%; padding: 13px; background: var(--green); color: white; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 800; cursor: pointer;
+  font-family: inherit; transition: all 0.2s; margin-top: 4px;
+}
+.btn-submit:hover { background: var(--green-h); box-shadow: 0 6px 20px rgba(22,163,74,0.35); }
 
-/* ── TOAST ── */
-#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--dark); color: white; padding: 10px 22px; border-radius: 8px; font-size: 13px; z-index: 9999; opacity: 0; transition: all 0.25s; pointer-events: none; }
-#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ────────── FOOTER ────────── */
+.footer {
+  background: var(--ink); color: rgba(255,255,255,0.4); padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-brand .fl { font-size: 20px; }
+.footer-brand strong { color: rgba(255,255,255,0.75); font-size: 14px; }
+.footer-brand span { font-size: 12px; }
+.footer-links { display: flex; gap: 6px; }
+.footer-links a {
+  padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08); transition: all 0.2s;
+}
+.footer-links a:hover { color: white; background: rgba(255,255,255,0.1); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  nav { padding: 12px 16px; }
-  .hero { padding: 48px 20px; }
-  section { padding: 48px 20px; }
-  .trust-bar { padding: 12px 20px; gap: 16px; }
-  .p-grid, .c-grid { grid-template-columns: 1fr; }
-  .proposal-form { padding: 20px; }
-  .po-body { padding: 18px; }
+/* ────────── TOAST ────────── */
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(8px);
+  background: var(--ink); color: white; padding: 11px 22px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; z-index: 9999; opacity: 0; pointer-events: none;
+  transition: all 0.25s; box-shadow: 0 8px 24px rgba(0,0,0,0.3); white-space: nowrap;
+}
+#toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ────────── REVEAL ────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ────────── RESPONSIVE ────────── */
+@media (max-width: 900px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .sec { padding: 64px 24px; }
+  .trust { padding: 0; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
+  .trust-item { padding: 14px 18px; flex-shrink: 0; font-size: 12px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+  .process-grid::before { display: none; }
+  .footer { flex-direction: column; text-align: center; padding: 24px; }
+}
+@media (max-width: 600px) {
+  .hero h1 { letter-spacing: -0.8px; }
+  .hero-stats { gap: 24px; }
+  .p-grid, .cf-grid { grid-template-columns: 1fr; }
+  .p-full, .cf-full { grid-column: auto; }
+  .p-out-foot { justify-content: stretch; }
+  .btn-act { flex: 1; justify-content: center; }
+  .biz-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media print {
-  nav, .trust-bar, .biz-types, .why-us, .packages, .cta-section, .contact-section, footer,
-  .proposal-form, .btn-generate, .po-footer { display: none !important; }
-  .proposal-section { background: white !important; color: black !important; padding: 0 !important; }
-  .proposal-out { display: block !important; box-shadow: none !important; }
-  .po-header { background: #0f1923 !important; -webkit-print-color-adjust: exact; }
+  nav, .trust, section:not(.proposal-sec), .cta-sec, .footer, #toast,
+  .p-card, .btn-gen { display: none !important; }
+  .sec-dark { background: white !important; }
+  .p-out { display: block !important; box-shadow: none !important; }
+  .p-out-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav class="nav">
   <div class="nav-brand">
-    <div class="icon">🦟</div>
+    <div class="nav-logo">🦟</div>
     <div>
-      <h1>אביה הדברות</h1>
-      <p>פתרונות הדברה לעסקים</p>
+      <div class="nav-name">אביה הדברות</div>
+      <div class="nav-sub">פתרונות הדברה לעסקים</div>
     </div>
   </div>
-  <button class="nav-cta" onclick="scrollTo('contact')">קבל הצעת מחיר חינם</button>
+  <div class="nav-links">
+    <a href="#biztypes">סוגי עסקים</a>
+    <a href="#why">למה אנחנו</a>
+    <a href="#proposal">הצעת מחיר</a>
+    <a href="#packages">חבילות</a>
+  </div>
+  <button class="nav-cta" onclick="goTo('contact')">קבל הצעת מחיר</button>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-tag">✓ מדביר מוסמך ומורשה</div>
-  <h2>הדברה מקצועית<br>ל<span>עסקים שמבינים</span></h2>
-  <p>חוזי שירות שנתיים, תיעוד מלא לרגולציה, תגובה תוך 24 שעות. כי עסק שלכם לא יכול להרשות לעצמו הפתעות.</p>
-  <div class="hero-btns">
-    <button class="btn-hero-main" onclick="scrollTo('proposal')">✨ קבל הצעת מחיר ב-60 שניות</button>
-    <button class="btn-hero-sec" onclick="waContact()">📞 שוחח עם שלומי עכשיו</button>
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      מדביר מוסמך ומורשה — משרד הבריאות
+    </div>
+    <h1>הדברה מקצועית<br>ל<em>עסקים שמרוויחים</em><br>מנקיון ומוניטין</h1>
+    <p>חוזי שירות שנתיים, תיעוד מלא לרגולציה, ותגובת חירום תוך 24 שעות. כי מזיק אחד שמישהו רואה עולה יותר ממחיר הטיפול.</p>
+    <div class="hero-actions">
+      <button class="btn-hero btn-hero-primary" onclick="goTo('proposal')">✨ קבל הצעת מחיר ב-60 שניות</button>
+      <button class="btn-hero btn-hero-outline" onclick="waContact()">📞 שוחח עם שלומי</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-num">+<span>200</span></div><div class="hs-label">עסקים מטופלים</div></div>
+      <div class="hs"><div class="hs-num"><span>15</span>+</div><div class="hs-label">שנות ניסיון</div></div>
+      <div class="hs"><div class="hs-num"><span>24</span>שע</div><div class="hs-label">זמן תגובה</div></div>
+      <div class="hs"><div class="hs-num"><span>100</span>%</div><div class="hs-label">מורשה ומוסמך</div></div>
+    </div>
   </div>
 </section>
 
 <!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item"><span class="ti">🏅</span> מדביר מוסמך ומורשה</div>
-  <div class="trust-item"><span class="ti">📋</span> תיעוד מלא לרגולציה</div>
-  <div class="trust-item"><span class="ti">⚡</span> תגובה תוך 24 שעות</div>
-  <div class="trust-item"><span class="ti">🔄</span> חוזי שירות שנתיים</div>
-  <div class="trust-item"><span class="ti">🌍</span> מרכז ושפלה</div>
+<div class="trust">
+  <div class="trust-item"><span class="trust-icon">🏅</span> מדביר מוסמך ומורשה</div>
+  <div class="trust-item"><span class="trust-icon">📋</span> תיעוד מלא לרגולציה</div>
+  <div class="trust-item"><span class="trust-icon">⚡</span> חירום תוך 24 שעות</div>
+  <div class="trust-item"><span class="trust-icon">🔄</span> חוזי שירות שנתיים</div>
+  <div class="trust-item"><span class="trust-icon">🌿</span> חומרים מאושרים בלבד</div>
+  <div class="trust-item"><span class="trust-icon">📍</span> מרכז ושפלה</div>
 </div>
 
-<!-- BUSINESS TYPES -->
-<section class="biz-types" id="biztypes">
-  <div class="section-center">
-    <div class="section-tag">אנחנו מטפלים ב</div>
-    <h2 class="section-title">פתרון לכל סוג עסק</h2>
-    <p class="section-sub">לחץ על סוג העסק שלך לקבלת הצעת מחיר מותאמת אישית</p>
+<!-- BIZ TYPES -->
+<section class="sec sec-alt" id="biztypes">
+  <div class="sec-center reveal">
+    <div class="label-tag">הסקטורים שאנחנו מטפלים בהם</div>
+    <h2 class="sec-title">פתרון שנבנה<br>לכל סוג עסק</h2>
+    <p class="sec-sub">לחץ על סוג העסק שלך — נקפוץ ישר להצעת מחיר מותאמת</p>
   </div>
   <div class="biz-grid">
-    <div class="biz-card" onclick="selectBiz(this,'בית אבות')" data-biz="בית אבות">
-      <div class="biz-icon">🏥</div>
-      <div class="biz-name">בית אבות</div>
-      <div class="biz-sub">רגולציה מחמירה</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'בית אבות')">
+      <span class="ic">🏥</span>
+      <div class="nm">בית אבות</div>
+      <div class="sm">רגולציה מחמירה</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'קאנטרי / מועדון ספורט')" data-biz="קאנטרי / מועדון ספורט">
-      <div class="biz-icon">🏊</div>
-      <div class="biz-name">קאנטרי / ספורט</div>
-      <div class="biz-sub">שטחי ירוק + מבנים</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'קאנטרי / מועדון ספורט')">
+      <span class="ic">🏊</span>
+      <div class="nm">קאנטרי</div>
+      <div class="sm">ירוק + מבנים</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'קניון / מרכז מסחרי')" data-biz="קניון / מרכז מסחרי">
-      <div class="biz-icon">🏬</div>
-      <div class="biz-name">קניון / מסחרי</div>
-      <div class="biz-sub">שטח גדול, תדירות גבוהה</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'קניון / מרכז מסחרי')">
+      <span class="ic">🏬</span>
+      <div class="nm">קניון</div>
+      <div class="sm">שטח גדול</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'בית אריזה / מחסן')" data-biz="בית אריזה / מחסן">
-      <div class="biz-icon">📦</div>
-      <div class="biz-name">בית אריזה / מחסן</div>
-      <div class="biz-sub">הגנה על מלאי</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'בית אריזה / מחסן')">
+      <span class="ic">📦</span>
+      <div class="nm">בית אריזה</div>
+      <div class="sm">הגנה על מלאי</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'מסעדה / בית קפה')" data-biz="מסעדה / בית קפה">
-      <div class="biz-icon">🍽️</div>
-      <div class="biz-name">מסעדה / בית קפה</div>
-      <div class="biz-sub">תקני בריאות קפדניים</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'מסעדה / בית קפה')">
+      <span class="ic">🍽️</span>
+      <div class="nm">מסעדה</div>
+      <div class="sm">תקני בריאות</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'מטבח תעשייתי')" data-biz="מטבח תעשייתי">
-      <div class="biz-icon">👨‍🍳</div>
-      <div class="biz-name">מטבח תעשייתי</div>
-      <div class="biz-sub">HACCP / משרד הבריאות</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'מטבח תעשייתי')">
+      <span class="ic">👨‍🍳</span>
+      <div class="nm">מטבח תעשייתי</div>
+      <div class="sm">HACCP</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'אולם אירועים')" data-biz="אולם אירועים">
-      <div class="biz-icon">🎉</div>
-      <div class="biz-name">אולם אירועים</div>
-      <div class="biz-sub">לפני/אחרי אירועים</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'אולם אירועים')">
+      <span class="ic">🎉</span>
+      <div class="nm">אולם אירועים</div>
+      <div class="sm">לפני/אחרי</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'מבנה / בניין משרדים')" data-biz="מבנה / בניין משרדים">
-      <div class="biz-icon">🏢</div>
-      <div class="biz-name">משרדים / מבנה</div>
-      <div class="biz-sub">סביבת עבודה נקייה</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'בניין משרדים')">
+      <span class="ic">🏢</span>
+      <div class="nm">משרדים</div>
+      <div class="sm">סביבת עבודה</div>
     </div>
-    <div class="biz-card" onclick="selectBiz(this,'בית ספר / גן ילדים')" data-biz="בית ספר / גן ילדים">
-      <div class="biz-icon">🏫</div>
-      <div class="biz-name">בית ספר / גן</div>
-      <div class="biz-sub">חומרים בטוחים לילדים</div>
+    <div class="biz-card reveal" onclick="pickBiz(this,'בית ספר / גן ילדים')">
+      <span class="ic">🏫</span>
+      <div class="nm">בית ספר / גן</div>
+      <div class="sm">בטוח לילדים</div>
     </div>
   </div>
 </section>
 
-<!-- WHY US -->
-<section class="why-us" id="why">
-  <div class="section-center">
-    <div class="section-tag">למה אביה הדברות</div>
-    <h2 class="section-title">עסקים בוחרים בנו</h2>
-    <p class="section-sub">כי אנחנו מבינים שעסק לא יכול להפסיק לעבוד בגלל מזיקים</p>
+<!-- WHY -->
+<section class="sec" id="why">
+  <div class="sec-center reveal">
+    <div class="label-tag">למה אביה הדברות</div>
+    <h2 class="sec-title">עסקים בוחרים בנו<br>ונשארים איתנו</h2>
+    <p class="sec-sub">כי אנחנו לא רק מדבירים — אנחנו שותפים לניהול הסיכונים של העסק שלכם</p>
   </div>
   <div class="why-grid">
-    <div class="why-card">
-      <div class="why-icon">📋</div>
+    <div class="why-card reveal">
+      <div class="why-ico">📋</div>
       <div class="why-title">תיעוד מלא לרגולציה</div>
-      <div class="why-text">דוח טיפול מפורט אחרי כל ביקור, מתאים לדרישות משרד הבריאות, HACCP ורשויות מקומיות.</div>
+      <div class="why-body">דוח טיפול מפורט אחרי כל ביקור. מתאים לדרישות משרד הבריאות, HACCP ורשויות מקומיות. מוכן לביקורת בכל רגע.</div>
     </div>
-    <div class="why-card">
-      <div class="why-icon">🔄</div>
-      <div class="why-title">חוזה שנתי ושקט נפשי</div>
-      <div class="why-text">תוכנית טיפול קבועה ומוסכמת מראש — אתם לא צריכים לזכור לתאם, אנחנו מגיעים.</div>
+    <div class="why-card reveal">
+      <div class="why-ico">🔄</div>
+      <div class="why-title">חוזה שנתי = שקט נפשי</div>
+      <div class="why-body">תוכנית טיפול מוסכמת מראש. אנחנו מגיעים לפי לוח הזמנים — אתם לא צריכים לזכור לתאם.</div>
     </div>
-    <div class="why-card">
-      <div class="why-icon">⚡</div>
+    <div class="why-card reveal">
+      <div class="why-ico">⚡</div>
       <div class="why-title">חירום תוך 24 שעות</div>
-      <div class="why-text">הופיעו מזיקים יום לפני אירוע? לקוחות חוזה מקבלים עדיפות מוחלטת לטיפול חירום.</div>
+      <div class="why-body">הופיעו מזיקים יום לפני אירוע? לקוחות חוזה מקבלים עדיפות מוחלטת לטיפול חירום ללא תוספת מחיר.</div>
     </div>
-    <div class="why-card">
-      <div class="why-icon">🌿</div>
-      <div class="why-title">חומרים בטוחים ומורשים</div>
-      <div class="why-text">שימוש בחומרי הדברה מאושרים בלבד, עם אפשרות לטיפול "ירוק" מופחת-כימיקלים לבקשה.</div>
+    <div class="why-card reveal">
+      <div class="why-ico">🌿</div>
+      <div class="why-title">חומרים מורשים ובטוחים</div>
+      <div class="why-body">שימוש בחומרים מאושרים בלבד. אפשרות לטיפול "ירוק" מופחת-כימיקלים לבקשה — מתאים לסביבות עם ילדים ומזון.</div>
     </div>
-    <div class="why-card">
-      <div class="why-icon">📍</div>
-      <div class="why-title">מרכז ושפלה — מכירים את השטח</div>
-      <div class="why-text">ניסיון עשיר עם העסקים באזור, הבנה של המזיקים האזוריים ועונתיות הפגעים.</div>
+    <div class="why-card reveal">
+      <div class="why-ico">📍</div>
+      <div class="why-title">מומחה לאזור</div>
+      <div class="why-body">ניסיון נרחב עם העסקים במרכז ובשפלה. מכיר את המזיקים האזוריים, העונתיות, ואת הדרישות הרגולטוריות המקומיות.</div>
     </div>
-    <div class="why-card">
-      <div class="why-icon">👤</div>
-      <div class="why-title">איש קשר ישיר — שלומי</div>
-      <div class="why-text">לא קול-סנטר. מדברים ישירות עם שלומי — מדביר מוסמך שיודע לענות על כל שאלה.</div>
+    <div class="why-card reveal">
+      <div class="why-ico">👤</div>
+      <div class="why-title">ישירות עם שלומי</div>
+      <div class="why-body">לא קול-סנטר, לא מוקד. מדברים ישירות עם שלומי לוי — מדביר מוסמך שמכיר את העסק שלכם אישית.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec sec-alt">
+  <div class="sec-center reveal">
+    <div class="label-tag">איך זה עובד</div>
+    <h2 class="sec-title">מפנייה לטיפול — 4 צעדים</h2>
+  </div>
+  <div class="process-grid">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-title">פנייה ראשונה</div>
+      <div class="step-body">טופס, WhatsApp או טלפון — שלומי חוזר תוך שעה</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-title">ביקור אבחון</div>
+      <div class="step-body">ביקור ראשון חינם — מיפוי הבעיה והצעת תוכנית</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-title">טיפול מקצועי</div>
+      <div class="step-body">טיפול עם תיעוד מלא + הנחיות לאחר הטיפול</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-title">מעקב ומניעה</div>
+      <div class="step-body">ביקורי מעקב קבועים ודוחות תקופתיים</div>
     </div>
   </div>
 </section>
 
 <!-- PROPOSAL GENERATOR -->
-<section class="proposal-section" id="proposal">
-  <div class="section-center">
-    <div class="section-tag">✨ AI Powered</div>
-    <h2 class="section-title">הצעת מחיר תוך 60 שניות</h2>
-    <p class="section-sub">מלא פרטים — ה-AI שלנו יבנה הצעה מותאמת לעסק שלך</p>
+<section class="sec sec-dark proposal-sec" id="proposal">
+  <div class="sec-center reveal">
+    <div class="label-tag">✦ AI Powered</div>
+    <h2 class="sec-title">הצעת מחיר מותאמת<br>תוך 60 שניות</h2>
+    <p class="sec-sub">מלא פרטים על העסק — ה-AI שלנו יבנה הצעה מקצועית שאפשר לשלוח ישר</p>
   </div>
   <div class="proposal-wrap">
-    <div class="proposal-form">
+    <div class="p-card reveal">
       <div class="p-grid">
-        <div class="p-group">
+        <div>
           <label class="p-label">שם העסק *</label>
-          <input class="p-input" id="pBizName" placeholder="מסעדת הים הכחול" type="text">
+          <input class="p-inp" id="pBizName" placeholder="מסעדת הים הכחול" type="text">
         </div>
-        <div class="p-group">
-          <label class="p-label">שם איש הקשר *</label>
-          <input class="p-input" id="pContact" placeholder="ישראל ישראלי" type="text">
+        <div>
+          <label class="p-label">איש קשר</label>
+          <input class="p-inp" id="pContact" placeholder="ישראל ישראלי" type="text">
         </div>
-        <div class="p-group">
+        <div>
           <label class="p-label">סוג העסק *</label>
-          <select class="p-input" id="pBizType">
+          <select class="p-inp" id="pType">
             <option value="">— בחר —</option>
             <option>בית אבות</option>
             <option>קאנטרי / מועדון ספורט</option>
@@ -381,204 +603,252 @@ footer strong { color: rgba(255,255,255,0.8); }
             <option>מסעדה / בית קפה</option>
             <option>מטבח תעשייתי</option>
             <option>אולם אירועים</option>
-            <option>מבנה / בניין משרדים</option>
+            <option>בניין משרדים</option>
             <option>בית ספר / גן ילדים</option>
             <option>אחר</option>
           </select>
         </div>
-        <div class="p-group">
-          <label class="p-label">גודל השטח (מ"ר)</label>
-          <select class="p-input" id="pSize">
+        <div>
+          <label class="p-label">גודל שטח</label>
+          <select class="p-inp" id="pSize">
             <option value="קטן עד 200 מ&quot;ר">קטן — עד 200 מ"ר</option>
-            <option value="בינוני 200-800 מ&quot;ר">בינוני — 200–800 מ"ר</option>
-            <option value="גדול 800-3000 מ&quot;ר">גדול — 800–3,000 מ"ר</option>
-            <option value="מאוד גדול מעל 3000 מ&quot;ר">מאוד גדול — מעל 3,000 מ"ר</option>
+            <option value="בינוני 200–800 מ&quot;ר">בינוני — 200–800 מ"ר</option>
+            <option value="גדול 800–3000 מ&quot;ר">גדול — 800–3,000 מ"ר</option>
+            <option value="מאוד גדול מעל 3000 מ&quot;ר">גדול מאוד — מעל 3,000</option>
           </select>
         </div>
-        <div class="p-group">
+        <div>
           <label class="p-label">בעיה עיקרית</label>
-          <select class="p-input" id="pPest">
-            <option>מקקים</option>
-            <option>עכברים / חולדות</option>
-            <option>נמלים</option>
-            <option>יתושים / זבובים</option>
-            <option>טרמיטים</option>
-            <option>פרעושים / קרציות</option>
+          <select class="p-inp" id="pPest">
+            <option>מקקים</option><option>עכברים / חולדות</option>
+            <option>נמלים</option><option>יתושים / זבובים</option>
+            <option>טרמיטים</option><option>פרעושים / קרציות</option>
             <option>כלליות — מניעה</option>
           </select>
         </div>
-        <div class="p-group">
+        <div>
           <label class="p-label">תדירות מועדפת</label>
-          <select class="p-input" id="pFreq">
-            <option value="חודשי">חודשי</option>
-            <option value="דו-חודשי">דו-חודשי</option>
-            <option value="רבעוני">רבעוני</option>
-            <option value="לפי הצורך">לפי הצורך</option>
+          <select class="p-inp" id="pFreq">
+            <option>חודשי</option><option>דו-חודשי</option>
+            <option>רבעוני</option><option>לפי הצורך</option>
           </select>
         </div>
-        <div class="p-group full">
-          <label class="p-label">דגשים מיוחדים (אופציונלי)</label>
-          <input class="p-input" id="pNotes" placeholder="למשל: פעילות בשעות הלילה, רגישות לריחות, אישור HACCP נדרש...">
+        <div class="p-full">
+          <label class="p-label">דגשים מיוחדים</label>
+          <input class="p-inp" id="pNotes" placeholder="HACCP נדרש, פעילות בלילה, רגישות לריחות...">
         </div>
       </div>
     </div>
-    <button class="btn-generate" id="genBtn" onclick="generateProposal()">
-      ✨ צור הצעת מחיר עכשיו
+    <button class="btn-gen reveal" id="genBtn" onclick="genProposal()">
+      <span>✨</span> צור הצעת מחיר עכשיו
     </button>
-
-    <!-- OUTPUT -->
-    <div class="proposal-out" id="proposalOut">
-      <div class="po-header">
+    <div class="p-out" id="pOut">
+      <div class="p-out-head">
         <div>
-          <h3>🦟 אביה הדברות</h3>
-          <p id="poSubtitle">הצעת מחיר מותאמת אישית</p>
+          <div class="p-out-head-title">🦟 אביה הדברות — הצעת מחיר</div>
+          <div class="p-out-head-sub" id="pOutSub">מותאמת אישית</div>
         </div>
-        <div style="text-align:left;font-size:12px;color:rgba(255,255,255,0.5)" id="poDate"></div>
+        <div class="p-out-date" id="pOutDate"></div>
       </div>
-      <div class="po-body">
-        <div class="po-section">
-          <h4>הצעת המחיר</h4>
-          <div class="po-text" id="poText"></div>
-        </div>
+      <div class="p-out-body">
+        <div class="p-out-text" id="pOutText"></div>
       </div>
-      <div class="po-footer">
-        <button class="btn-action btn-print" onclick="window.print()">🖨️ הדפס / PDF</button>
-        <button class="btn-action btn-copy" onclick="copyProposal()">📋 העתק</button>
-        <button class="btn-action btn-wa" onclick="sendProposalWA()">📱 שלח ב-WhatsApp</button>
+      <div class="p-out-foot">
+        <button class="btn-act btn-dark" onclick="window.print()">🖨️ PDF</button>
+        <button class="btn-act btn-outline" onclick="copyProposal()">📋 העתק</button>
+        <button class="btn-act btn-green" onclick="waProposal()">📱 שלח ב-WhatsApp</button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PACKAGES -->
-<section class="packages" id="packages">
-  <div class="section-center">
-    <div class="section-tag">חבילות שירות</div>
-    <h2 class="section-title">מחירים שקופים לעסקים</h2>
-    <p class="section-sub">חוזה שנתי = מחיר טוב יותר + עדיפות בשירות + שקט נפשי</p>
+<section class="sec" id="packages">
+  <div class="sec-center reveal">
+    <div class="label-tag">חבילות שירות</div>
+    <h2 class="sec-title">מחירים שקופים<br>בלי הפתעות</h2>
+    <p class="sec-sub">חוזה שנתי = מחיר טוב יותר + עדיפות בשירות + שקט נפשי מלא</p>
   </div>
   <div class="pkg-grid">
-    <div class="pkg">
-      <div class="pkg-name">בסיסי</div>
-      <div class="pkg-desc">לעסקים קטנים</div>
-      <div class="pkg-price">₪350 <span>לביקור</span></div>
-      <div class="pkg-period">ביקור חד-פעמי</div>
-      <ul class="pkg-features">
-        <li>טיפול ממוקד בבעיה</li>
-        <li>דוח ביקור</li>
-        <li>אחריות 30 יום</li>
+    <div class="pkg reveal">
+      <span class="pkg-icon">🔰</span>
+      <div class="pkg-name">חד פעמי</div>
+      <div class="pkg-desc">לטיפול ממוקד בבעיה</div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-price-row">
+        <span class="pkg-price">₪350</span>
+        <span class="pkg-per">לביקור</span>
+      </div>
+      <div class="pkg-period">ללא התחייבות</div>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> טיפול ממוקד</li>
+        <li><span class="ck">✓</span> דוח ביקור</li>
+        <li><span class="ck">✓</span> אחריות 30 יום</li>
       </ul>
     </div>
-    <div class="pkg featured">
-      <div class="pkg-tag-top">הכי פופולרי</div>
+    <div class="pkg featured reveal">
+      <div class="pkg-chip">הכי פופולרי</div>
+      <span class="pkg-icon">⭐</span>
       <div class="pkg-name">שנתי</div>
       <div class="pkg-desc">לעסקים בינוניים</div>
-      <div class="pkg-price">₪290 <span>לביקור</span></div>
-      <div class="pkg-period">6 ביקורים בשנה</div>
-      <ul class="pkg-features">
-        <li>חיסכון של 17% לעומת בסיסי</li>
-        <li>תיעוד מלא לרגולציה</li>
-        <li>עדיפות בחירום</li>
-        <li>ייעוץ מניעה בחינם</li>
-        <li>תזכורות ביקור אוטומטיות</li>
+      <div class="pkg-divider"></div>
+      <div class="pkg-price-row">
+        <span class="pkg-price">₪290</span>
+        <span class="pkg-per">לביקור</span>
+      </div>
+      <div class="pkg-period">6 ביקורים בשנה — חיסכון 17%</div>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> תיעוד מלא לרגולציה</li>
+        <li><span class="ck">✓</span> עדיפות בחירום</li>
+        <li><span class="ck">✓</span> ייעוץ מניעה חינם</li>
+        <li><span class="ck">✓</span> תזכורות ביקור אוטומטיות</li>
+        <li><span class="ck">✓</span> דוח סיכום שנתי</li>
       </ul>
     </div>
-    <div class="pkg">
+    <div class="pkg reveal">
+      <span class="pkg-icon">👑</span>
       <div class="pkg-name">פרימיום</div>
       <div class="pkg-desc">לעסקים גדולים</div>
-      <div class="pkg-price">מחיר <span>מותאם</span></div>
+      <div class="pkg-divider"></div>
+      <div class="pkg-price-row">
+        <span class="pkg-price" style="font-size:24px">מחיר</span>
+        <span class="pkg-per">מותאם</span>
+      </div>
       <div class="pkg-period">ביקור חודשי + חירום</div>
-      <ul class="pkg-features">
-        <li>ביקור חודשי קבוע</li>
-        <li>תגובת חירום תוך 4 שעות</li>
-        <li>HACCP / אישורי בריאות</li>
-        <li>מיפוי מזיקים עונתי</li>
-        <li>איש קשר ישיר — שלומי</li>
+      <ul class="pkg-list">
+        <li><span class="ck">✓</span> ביקור חודשי קבוע</li>
+        <li><span class="ck">✓</span> תגובת חירום תוך 4 שעות</li>
+        <li><span class="ck">✓</span> HACCP / אישורי בריאות</li>
+        <li><span class="ck">✓</span> מיפוי מזיקים עונתי</li>
+        <li><span class="ck">✓</span> איש קשר ישיר — שלומי</li>
       </ul>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <h2>מוכנים לשמור על העסק שלכם?</h2>
-  <p>ביקור ראשון לאבחון — ללא עלות וללא התחייבות</p>
-  <button class="btn-cta-white" onclick="scrollTo('contact')">קבע ביקור אבחון חינם</button>
+<section class="cta-sec">
+  <h2>ביקור אבחון ראשון — ללא עלות</h2>
+  <p>שלומי יגיע, יסתכל, ויגיד לכם בדיוק מה צריך. ללא התחייבות.</p>
+  <button class="btn-cta" onclick="goTo('contact')">קבע ביקור אבחון חינם</button>
+  <div class="cta-note">ממוצע זמן תגובה: פחות משעה בשעות פעילות</div>
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="section-center">
-    <div class="section-tag">צור קשר</div>
-    <h2 class="section-title">נחזור אליך תוך שעה</h2>
-    <p class="section-sub">שלומי לוי — 052-780-7612 | א-ה 8:00–16:00</p>
-  </div>
-  <div class="contact-wrap">
-    <div class="c-grid">
-      <div class="c-group">
-        <label class="c-label">שם *</label>
-        <input class="c-input" id="cName" placeholder="ישראל ישראלי" type="text">
-      </div>
-      <div class="c-group">
-        <label class="c-label">טלפון *</label>
-        <input class="c-input" id="cPhone" placeholder="050-0000000" type="tel">
-      </div>
-      <div class="c-group full">
-        <label class="c-label">שם העסק</label>
-        <input class="c-input" id="cBiz" placeholder="שם העסק שלך" type="text">
-      </div>
-      <div class="c-group full">
-        <label class="c-label">סוג העסק</label>
-        <select class="c-input" id="cType">
-          <option value="">— בחר —</option>
-          <option>בית אבות</option><option>קאנטרי / מועדון ספורט</option>
-          <option>קניון / מרכז מסחרי</option><option>בית אריזה / מחסן</option>
-          <option>מסעדה / בית קפה</option><option>מטבח תעשייתי</option>
-          <option>אולם אירועים</option><option>מבנה / בניין משרדים</option>
-          <option>אחר</option>
-        </select>
-      </div>
-      <div class="c-group full">
-        <label class="c-label">הודעה</label>
-        <textarea class="c-input" id="cMsg" rows="3" placeholder="ספר לנו על הבעיה או השאלה..."></textarea>
+<section class="sec" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <div class="label-tag">יצירת קשר</div>
+      <h3>נחזור אליכם<br>תוך שעה</h3>
+      <p>שלחו פרטים ושלומי יחזור אליכם בהקדם. מעדיפים לדבר ישירות? מוזמנים להתקשר.</p>
+      <div class="contact-items">
+        <div class="ci">
+          <div class="ci-icon">📱</div>
+          <div>
+            <div class="ci-title">טלפון ישיר</div>
+            <div class="ci-val"><a href="tel:0527807612">052-780-7612</a></div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">☎️</div>
+          <div>
+            <div class="ci-title">משרד</div>
+            <div class="ci-val"><a href="tel:0779979673">077-997-9673</a></div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">🕐</div>
+          <div>
+            <div class="ci-title">שעות פעילות</div>
+            <div class="ci-val">א–ה 8:00–16:00 | שישי בתיאום</div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-title">אזור שירות</div>
+            <div class="ci-val">מרכז ושפלה</div>
+          </div>
+        </div>
       </div>
     </div>
-    <button class="btn-submit" onclick="submitContact()">📩 שלח פנייה</button>
+    <div class="contact-form-card reveal">
+      <div class="cf-grid">
+        <div>
+          <label class="cf-label">שם *</label>
+          <input class="cf-inp" id="cName" placeholder="ישראל ישראלי" type="text">
+        </div>
+        <div>
+          <label class="cf-label">טלפון *</label>
+          <input class="cf-inp" id="cPhone" placeholder="050-0000000" type="tel">
+        </div>
+        <div class="cf-full">
+          <label class="cf-label">שם העסק</label>
+          <input class="cf-inp" id="cBiz" placeholder="שם העסק שלכם">
+        </div>
+        <div class="cf-full">
+          <label class="cf-label">סוג העסק</label>
+          <select class="cf-inp" id="cType">
+            <option value="">— בחר —</option>
+            <option>בית אבות</option><option>קאנטרי</option>
+            <option>קניון</option><option>בית אריזה / מחסן</option>
+            <option>מסעדה / בית קפה</option><option>מטבח תעשייתי</option>
+            <option>אולם אירועים</option><option>משרדים</option><option>אחר</option>
+          </select>
+        </div>
+        <div class="cf-full">
+          <label class="cf-label">הודעה</label>
+          <textarea class="cf-inp" id="cMsg" rows="3" placeholder="ספרו לנו על הבעיה..."></textarea>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">📩 שלח פנייה</button>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <strong>🦟 אביה הדברות</strong> — שלומי לוי, מדביר מוסמך ומורשה<br>
-  <span style="margin-top:6px;display:block">077-997-9673 | 052-780-7612</span>
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="fl">🦟</span>
+    <div>
+      <strong>אביה הדברות</strong><br>
+      <span>שלומי לוי, מדביר מוסמך ומורשה</span>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="avia-bot-v9.html">💬 בוט לקוחות פרטיים</a>
+  </div>
 </footer>
 
 <div id="toast"></div>
 
 <script>
-const SERVER  = 'https://nodejs-production-55c3.up.railway.app';
-const MODEL   = 'claude-sonnet-4-6';
-const WA_NUM  = '972527807612';
+const SERVER = 'https://nodejs-production-55c3.up.railway.app';
+const MODEL  = 'claude-sonnet-4-6';
+const WA_NUM = '972527807612';
 
-// scroll helper
-function scrollTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'}); }
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(els => {
+  els.forEach(el => { if (el.isIntersecting) { el.target.classList.add('in'); observer.unobserve(el.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// select business type from grid → fill form
-function selectBiz(el, name) {
-  document.querySelectorAll('.biz-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('pBizType').value = name;
-  setTimeout(() => scrollTo('proposal'), 300);
-}
-
-// whatsapp
+// ── HELPERS ──
+function goTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
 function waContact() { window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent('שלום שלומי, אני מעוניין בשירותי הדברה לעסק שלי')}`, '_blank'); }
 
-// ── PROPOSAL GENERATOR ──
-async function generateProposal() {
+// ── BIZ PICK ──
+function pickBiz(el, name) {
+  document.querySelectorAll('.biz-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('pType').value = name;
+  setTimeout(() => goTo('proposal'), 250);
+}
+
+// ── PROPOSAL ──
+async function genProposal() {
   const bizName = document.getElementById('pBizName').value.trim();
-  const contact = document.getElementById('pContact').value.trim();
-  const bizType = document.getElementById('pBizType').value;
+  const bizType = document.getElementById('pType').value;
   if (!bizName || !bizType) { toast('נא למלא שם עסק וסוג עסק'); return; }
 
   const size  = document.getElementById('pSize').value;
@@ -588,90 +858,79 @@ async function generateProposal() {
 
   const btn = document.getElementById('genBtn');
   btn.disabled = true;
-  btn.innerHTML = '<span class="loading-dots">יוצר הצעה</span>';
+  btn.innerHTML = '<span style="opacity:0.6">יוצר הצעה</span><span style="animation:ld 1s infinite;display:inline-block">▋</span>';
 
-  const out = document.getElementById('proposalOut');
-  const txt = document.getElementById('poText');
+  const out  = document.getElementById('pOut');
+  const txt  = document.getElementById('pOutText');
   out.style.display = 'block';
   txt.textContent = '';
-  txt.className = 'po-text loading-dots';
+  txt.className = 'p-out-text loading';
+  document.getElementById('pOutSub').textContent = `${bizType} — ${bizName}`;
+  document.getElementById('pOutDate').textContent = new Date().toLocaleDateString('he-IL',{day:'numeric',month:'long',year:'numeric'});
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
 
-  document.getElementById('poSubtitle').textContent = `${bizType} — ${bizName}`;
-  document.getElementById('poDate').textContent = new Date().toLocaleDateString('he-IL', {day:'numeric',month:'long',year:'numeric'});
+  const prompt = `כתוב הצעת מחיר מקצועית בעברית עבור "${bizName}" (${bizType}).
 
-  const prompt = `כתוב הצעת מחיר מקצועית ומפורטת בעברית עבור "${bizName}" — ${bizType}.
+פרטים: שטח ${size}, בעיה עיקרית: ${pest}, תדירות: ${freq}${notes?', הערות: '+notes:''}.
 
-פרטים:
-- שטח: ${size}
-- בעיה עיקרית: ${pest}
-- תדירות: ${freq}
-${notes ? `- דגשים: ${notes}` : ''}
+כלול:
+1. פתיח מקצועי המדבר על הצרכים הייחודיים של ${bizType}
+2. מה כולל הטיפול המומלץ
+3. תדירות ולמה היא נכונה לסוג זה
+4. מה כולל חוזה שנתי
+5. הצעת מחיר: לבית אבות/מסעדה/מטבח ₪350-650 לביקור; קניון/מחסן גדול ₪500-950; שאר ₪290-520
+6. קריאה לפעולה — ביקור אבחון חינם, שלומי 052-780-7612
 
-ההצעה תכלול:
-1. פתיח מקצועי המתייחס לצרכים הספציפיים של ${bizType}
-2. פירוט הטיפול המומלץ — שלבים, שיטות, חומרים
-3. תדירות מומלצת ולמה
-4. מה כלול בחוזה השנתי
-5. הצעת מחיר משוערת (בית אבות / מסעדה / מטבח תעשייתי: ₪350-600 לביקור; קניון / מחסן גדול: ₪500-900; שאר: ₪280-500)
-6. זמינות ותנאים
-7. סיום עם קריאה לפעולה — לתאם ביקור אבחון חינם עם שלומי: 052-780-7612
-
-הסגנון: מקצועי, אמין, ישיר. ללא markdown, ללא כוכביות. פסקאות ברורות.`;
+סגנון: מקצועי ואמין. ללא markdown, ללא כוכביות. פסקאות ברורות.`;
 
   try {
     const res = await fetch(`${SERVER}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 900,
-        system: 'אתה עוזר מקצועי של אביה הדברות — עסק הדברה מוסמך. כתוב הצעות מחיר מקצועיות בעברית בלבד, ללא markdown.',
-        messages: [{ role: 'user', content: prompt }]
+        model: MODEL, max_tokens: 900,
+        system: 'אתה עוזר של אביה הדברות — עסק הדברה מקצועי. כתוב הצעות מחיר מקצועיות בעברית בלבד, ללא markdown.',
+        messages:[{role:'user',content:prompt}]
       })
     });
     if (!res.ok) throw new Error();
     const data = await res.json();
-    const msg = data.content?.[0]?.text || 'שגיאה ביצירת ההצעה';
-    txt.textContent = msg.trim();
-    txt.className = 'po-text';
-    out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    txt.textContent = (data.content?.[0]?.text || 'שגיאה').trim();
+    txt.className = 'p-out-text';
   } catch {
-    txt.textContent = '⚠️ שגיאה בחיבור לשרת. נסה שוב או פנה לשלומי ישירות: 052-780-7612';
-    txt.className = 'po-text';
+    txt.textContent = '⚠️ שגיאה בחיבור לשרת. נסה שוב או פנה לשלומי: 052-780-7612';
+    txt.className = 'p-out-text';
   }
-
   btn.disabled = false;
-  btn.innerHTML = '✨ צור הצעת מחיר חדשה';
+  btn.innerHTML = '<span>✨</span> צור הצעת מחיר חדשה';
 }
 
 function copyProposal() {
-  const text = `אביה הדברות — הצעת מחיר\n${document.getElementById('poDate').textContent}\n\n${document.getElementById('poText').textContent}`;
-  navigator.clipboard.writeText(text).then(() => toast('הועתק ✓'));
+  const t = `אביה הדברות — הצעת מחיר\n${document.getElementById('pOutDate').textContent}\n\n${document.getElementById('pOutText').textContent}`;
+  navigator.clipboard.writeText(t).then(() => toast('הועתק ✓'));
+}
+function waProposal() {
+  const t = `שלום,\n\nהצעת מחיר מאביה הדברות:\n\n${document.getElementById('pOutText').textContent}\n\nלפרטים: 052-780-7612`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(t)}`, '_blank');
 }
 
-function sendProposalWA() {
-  const text = `שלום,\n\nמצורפת הצעת מחיר מאביה הדברות:\n\n${document.getElementById('poText').textContent}\n\nלפרטים: 052-780-7612`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-}
-
-// ── CONTACT FORM ──
-function submitContact() {
+// ── CONTACT ──
+function submitForm() {
   const name  = document.getElementById('cName').value.trim();
   const phone = document.getElementById('cPhone').value.trim();
   if (!name || !phone) { toast('נא למלא שם וטלפון'); return; }
   const biz  = document.getElementById('cBiz').value.trim();
   const type = document.getElementById('cType').value;
   const msg  = document.getElementById('cMsg').value.trim();
-  const text = `פנייה חדשה מהאתר העסקי:\n\nשם: ${name}\nטלפון: ${phone}${biz?'\nעסק: '+biz:''}${type?'\nסוג: '+type:''}${msg?'\nהודעה: '+msg:''}`;
+  const text = `פנייה חדשה מהאתר העסקי 🏢\n\nשם: ${name}\nטלפון: ${phone}${biz?'\nעסק: '+biz:''}${type?'\nסוג: '+type:''}${msg?'\n\n'+msg:''}`;
   window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(text)}`, '_blank');
-  toast('תודה! שלומי יחזור אליך בהקדם');
+  toast('תודה! שלומי יחזור אליכם בהקדם');
 }
 
 // ── TOAST ──
 function toast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2800);
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2800);
 }
 </script>
 </body>
