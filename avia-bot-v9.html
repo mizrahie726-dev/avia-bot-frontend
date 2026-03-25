@@ -944,6 +944,10 @@ function handleInput(txt, isButton=false){
       setTimeout(()=>{ addBot('אפשר לדעת שמך?'); }, 300);
       return;
     }
+    if(/\d/.test(name)){
+      setTimeout(()=>{ addBot('שם לא יכול להכיל מספרים 😊 אפשר לכתוב שם בלבד?'); }, 300);
+      return;
+    }
     S.name = name;
     S.step = 'collect_phone';
     setTimeout(()=>{
@@ -978,20 +982,53 @@ function handleInput(txt, isButton=false){
     S.step = 'done';
     const av = 'AV-' + Math.floor(1000 + Math.random()*9000);
     setTimeout(()=>{
-      const prepNote = PREP[S.pest] ? ("\n\n" + PREP[S.pest]) : "";
+      const prepNote = PREP[S.pest] ? PREP[S.pest] : "";
       const petLine = S.pets && !S.pets.includes('אין') ? `\n🐾 ${S.pets}` : '';
       const childLine = S.children && !S.children.includes('אין') ? `\n👶 ${S.children}` : '';
-      addBot(`מעולה ${S.name}! 🎉 קבענו ל-${S.chosenTime}.\n\n🪲 ${S.pest} — ${S.property || ''}${petLine}${childLine}\n📞 ${S.phone}\nמספר אישור: ${av}\n\nמעדכן את שלומי — הוא בדרך אליך. אם יש שינוי או שאלה שעולה עד אז, פשוט כתוב לי כאן. שיהיה יום שקט! 😊`);
 
-      const petLine2 = S.pets && !S.pets.includes('אין') ? '%0Aחיות: ' + S.pets : '';
-      const childLine2 = S.children && !S.children.includes('אין') ? '%0Aילדים: ' + S.children : '';
-      const recurLine = S.recurring && !S.recurring.includes('לא') ? '%0Aסוג: ' + S.recurring : '';
+      // ── הודעת בוט — סיכום מסודר + הנחיות ──
+      let botSummary = `✅ מעולה ${S.name}! הפגישה קבועה.\n`;
+      botSummary += `━━━━━━━━━━━━━━\n`;
+      botSummary += `🗓️ מועד: ${S.chosenTime}\n`;
+      botSummary += `🪲 טיפול: ${S.pest}${S.property ? ' — ' + S.property : ''}\n`;
+      botSummary += `📞 טלפון: ${S.phone}`;
+      if(petLine) botSummary += petLine;
+      if(childLine) botSummary += childLine;
+      botSummary += `\n🔖 אישור: ${av}\n`;
+      botSummary += `━━━━━━━━━━━━━━\n`;
+      botSummary += `שלומי יאשר את הפגישה בהודעה קצרה. יש שאלה? פשוט כתוב כאן 😊`;
+      if(prepNote){
+        botSummary += `\n\n📋 הנחיות הכנה לטיפול:\n${prepNote}`;
+      }
+      addBot(botSummary);
 
-      const bizLine = S.bizType ? '%0Aעסק: ' + S.bizType + (S.bizAnswer1 ? ' | ' + S.bizAnswer1 : '') + (S.bizAnswer2 ? ' | ' + S.bizAnswer2 : '') + (S.bizAnswer3 ? ' | ' + S.bizAnswer3 : '') : '';
-      const shlomiMsg = 'פגישה חדשה! 🗓️%0Aמספר: ' + av + '%0Aשם: ' + S.name + '%0Aטלפון: ' + S.phone + '%0Aטיפול: ' + S.pest + ' — ' + (S.property||'') + '%0Aמועד: ' + S.chosenTime + petLine2 + childLine2 + recurLine + bizLine;
+      // ── WhatsApp לשלומי ──
+      const petLine2 = S.pets && !S.pets.includes('אין') ? '%0A🐾 חיות: ' + S.pets : '';
+      const childLine2 = S.children && !S.children.includes('אין') ? '%0A👶 ילדים: ' + S.children : '';
+      const recurLine = S.recurring && S.recurring !== 'לא בטוח' && !S.recurring.includes('ראשונה') ? '%0A🔄 היסטוריה: ' + S.recurring : (S.recurring && S.recurring.includes('ראשונה') ? '%0A🆕 פעם ראשונה' : '');
+      const bizLine = S.bizType ? '%0A🏪 עסק: ' + S.bizType + (S.bizAnswer1 ? ' | ' + S.bizAnswer1 : '') + (S.bizAnswer2 ? ' | ' + S.bizAnswer2 : '') + (S.bizAnswer3 ? ' | ' + S.bizAnswer3 : '') : '';
+      const shlomiMsg = '🗓️ פגישה חדשה!%0A%0A'
+        + '🔖 מספר: ' + av + '%0A'
+        + '👤 שם: ' + S.name + '%0A'
+        + '📞 טלפון: ' + S.phone + '%0A'
+        + '🪲 טיפול: ' + S.pest + (S.property ? ' — ' + S.property : '') + '%0A'
+        + '⏰ מועד: ' + S.chosenTime
+        + petLine2 + childLine2 + recurLine + bizLine;
       const shlomiWa = 'https://wa.me/972527807612?text=' + shlomiMsg;
 
-      const clientMsg = encodeURIComponent('סיכום פגישה — אביה הדברות\nמספר אישור: ' + av + '\nמועד: ' + S.chosenTime + '\nטיפול: ' + S.pest + '\nשם: ' + S.name + ' | ' + S.phone + '\n\nשלומי יצור קשר לאישור.');
+      // ── WhatsApp ללקוח ──
+      const prepEncoded = prepNote ? encodeURIComponent('\n\n📋 הנחיות הכנה לטיפול:\n' + prepNote.replace(/\n•/g,'\n •')) : '';
+      const clientMsg = encodeURIComponent(
+        '✅ אישור פגישה — אביה הדברות\n'
+        + '━━━━━━━━━━━━━━\n'
+        + '🔖 מספר אישור: ' + av + '\n'
+        + '🗓️ מועד: ' + S.chosenTime + '\n'
+        + '🪲 טיפול: ' + S.pest + (S.property ? ' — ' + S.property : '') + '\n'
+        + '👤 שם: ' + S.name + ' | 📞 ' + S.phone + '\n'
+        + '━━━━━━━━━━━━━━\n'
+        + 'שלומי יצור קשר לאישור סופי.\n'
+        + 'לשאלות: 077-997-9673'
+      ) + prepEncoded;
       const clientWa = 'https://wa.me/?text=' + clientMsg;
 
       const qrEl = document.getElementById('qr');
@@ -1001,7 +1038,7 @@ function handleInput(txt, isButton=false){
       btnShlomi.href = shlomiWa;
       btnShlomi.target = '_blank';
       btnShlomi.className = 'qr';
-      btnShlomi.style.cssText = 'text-decoration:none;background:#25D366;color:white;border:none;font-weight:600';
+      btnShlomi.style.cssText = 'text-decoration:none;background:#25D366;color:white;border:none;font-weight:700';
       btnShlomi.textContent = '📲 שלח פגישה לשלומי';
       qrEl.appendChild(btnShlomi);
 
@@ -1009,8 +1046,8 @@ function handleInput(txt, isButton=false){
       btnClient.href = clientWa;
       btnClient.target = '_blank';
       btnClient.className = 'qr';
-      btnClient.style.textDecoration = 'none';
-      btnClient.textContent = '💬 שמור סיכום ב-WhatsApp';
+      btnClient.style.cssText = 'text-decoration:none;font-weight:600';
+      btnClient.textContent = '💬 שמור אישור + הנחיות';
       qrEl.appendChild(btnClient);
 
       const tel = document.createElement('a');
