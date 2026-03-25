@@ -3,390 +3,363 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>אביה הדברות — מענה מיידי 24/7</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<title>אביה הדברות | מדביר מוסמך | מחיר מיידי 24/7</title>
+<meta name="description" content="שלומי לוי — מדביר מוסמך עם 20+ שנה ניסיון. ג'וקים, עכברים, פשפשים, נמלים ועוד. מחיר מיידי, הגעה ארצית, ללא תוספת נסיעה.">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --dark:#ffffff;
   --green:#1a4a2e;
   --mid:#2d7a4f;
-  --light:#3d8f5f;
-  --gold:#2d7a4f;
-  --goldL:#2d7a4f;
-  --white:#111827;
-  --gray:#6b7280;
+  --light:#4caf76;
+  --bg:#f6f8f6;
+  --bg2:#eef4f0;
+  --border:#ddeae2;
   --text:#111827;
-  --bg:#f9fafb;
-  --bg2:#f0f7f3;
-  --border:#e2ede8;
+  --gray:#6b7280;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Heebo',sans-serif;background:#f6f8f6;color:#111827;overflow-x:hidden}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
-/* ── HERO ── */
+/* ═══ NAV ═══ */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(246,248,246,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 6vw;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-size:1.1rem;font-weight:700;color:var(--green);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo span{color:var(--mid)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-phone{
+  display:flex;align-items:center;gap:6px;
+  color:var(--gray);font-size:.9rem;font-weight:500;
+  text-decoration:none;transition:color .2s;
+}
+.nav-phone:hover{color:var(--mid)}
+.nav-wa{
+  display:flex;align-items:center;gap:6px;
+  background:#25D366;color:white;
+  font-size:.85rem;font-weight:600;
+  padding:8px 16px;border-radius:50px;
+  text-decoration:none;transition:opacity .2s;
+}
+.nav-wa:hover{opacity:.9}
+.nav-cta{
+  display:flex;align-items:center;gap:6px;
+  background:var(--mid);color:white;
+  font-size:.85rem;font-weight:600;font-family:'Heebo',sans-serif;
+  padding:8px 18px;border-radius:50px;
+  border:none;cursor:pointer;transition:background .2s;
+}
+.nav-cta:hover{background:var(--light)}
+
+/* ═══ HERO ═══ */
 .hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:4rem;
-  padding:6rem 8vw 4rem;
-  position:relative;
-  overflow:hidden;
-  background:#f6f8f6;
+  min-height:calc(100vh - 64px);
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:4rem;
+  padding:5rem 8vw 4rem;
+  position:relative;overflow:hidden;
 }
 .hero::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse 70% 60% at 100% 0%, rgba(61,143,95,0.07) 0%, transparent 60%);
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 100% 0%,rgba(76,175,118,.07) 0%,transparent 60%);
   pointer-events:none;
 }
-.hero::after{
-  content:'';
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#e2ede8,transparent);
-}
-
-.hero-content{position:relative;z-index:1}
-
-.badge-row{display:flex;align-items:center;gap:10px;margin-bottom:2rem;animation:fadeUp .6s ease both}
-.live-badge{
+.badge{
   display:inline-flex;align-items:center;gap:7px;
-  background:rgba(45,122,79,0.08);
-  border:1px solid rgba(45,122,79,0.2);
-  color:#2d7a4f;
-  font-size:13px;font-weight:500;
+  background:rgba(45,122,79,.09);
+  border:1px solid rgba(45,122,79,.2);
+  color:var(--mid);font-size:13px;font-weight:500;
   padding:6px 14px;border-radius:50px;
+  margin-bottom:1.8rem;
+  animation:fadeUp .5s ease both;
 }
-.live-dot{width:7px;height:7px;background:#5de89a;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
-
+.live-dot{width:7px;height:7px;background:#5de89a;border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
 h1{
-  font-size:clamp(2.6rem,5vw,4.2rem);
-  font-weight:900;
-  line-height:1.1;
-  margin-bottom:1.2rem;
-  animation:fadeUp .7s .1s ease both;
+  font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;
+  margin-bottom:1.2rem;animation:fadeUp .6s .1s ease both;
 }
-h1 em{
-  font-style:normal;
-  color:#2d7a4f;
-  position:relative;
-}
-h1 em::after{
-  content:'';
-  position:absolute;
-  bottom:-4px;left:0;right:0;
-  height:3px;
-  background:linear-gradient(90deg,var(--light),transparent);
-  border-radius:2px;
-}
+h1 em{font-style:normal;color:var(--mid)}
 .hero-sub{
-  font-size:1.15rem;
-  color:#6b7280;
-  font-weight:300;
-  line-height:1.75;
-  max-width:480px;
-  margin-bottom:2.5rem;
-  animation:fadeUp .7s .2s ease both;
+  font-size:1.1rem;color:var(--gray);line-height:1.8;
+  max-width:460px;margin-bottom:2.5rem;
+  animation:fadeUp .6s .2s ease both;
 }
-
-.cta-group{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:9px;
+.cta-group{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+.btn-main{
+  display:inline-flex;align-items:center;gap:8px;
   background:linear-gradient(135deg,var(--mid),var(--light));
-  color:white;font-family:'Heebo',sans-serif;
-  font-size:1rem;font-weight:700;
-  padding:14px 28px;border-radius:50px;
-  min-height:48px;
-  border:none;cursor:pointer;
+  color:white;font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;
+  padding:13px 26px;border-radius:50px;border:none;cursor:pointer;
   text-decoration:none;
-  box-shadow:0 4px 24px rgba(45,122,79,0.4);
+  box-shadow:0 4px 20px rgba(45,122,79,.35);
   transition:transform .2s,box-shadow .2s;
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(45,122,79,0.5)}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:9px;
-  background:transparent;
-  border:1px solid rgba(245,242,235,0.2);
-  color:rgba(245,242,235,0.75);
-  font-family:'Heebo',sans-serif;
-  font-size:1rem;font-weight:500;
-  padding:14px 28px;border-radius:50px;
-  cursor:pointer;text-decoration:none;
-  transition:border-color .2s,color .2s;
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,122,79,.45)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  background:white;color:var(--mid);
+  border:1.5px solid var(--border);
+  font-family:'Heebo',sans-serif;font-size:1rem;font-weight:600;
+  padding:13px 26px;border-radius:50px;cursor:pointer;
+  text-decoration:none;transition:border-color .2s,box-shadow .2s;
 }
-.btn-secondary:hover{border-color:var(--light);color:var(--white)}
-
+.btn-outline:hover{border-color:var(--mid);box-shadow:0 2px 12px rgba(45,122,79,.12)}
 .stats-row{
-  display:flex;gap:2.5rem;margin-top:3rem;
-  padding-top:2rem;
-  border-top:1px solid #e2ede8;
-  animation:fadeUp .7s .4s ease both;
+  display:flex;gap:2.5rem;margin-top:2.8rem;
+  padding-top:2rem;border-top:1px solid var(--border);
+  animation:fadeUp .6s .4s ease both;
 }
-.stat-num{font-size:1.8rem;font-weight:700;color:#2d7a4f;display:block}
-.stat-lbl{font-size:12px;color:var(--gray);margin-top:3px}
+.stat-num{font-size:1.7rem;font-weight:700;color:var(--mid);display:block}
+.stat-lbl{font-size:11px;color:var(--gray);margin-top:2px}
 
-/* ── CHAT PREVIEW ── */
-.hero-chat{
-  position:relative;z-index:1;
-  animation:fadeUp .8s .2s ease both;
-}
+/* Phone Mockup */
+.hero-phone{animation:fadeUp .7s .2s ease both}
 .phone-frame{
-  background:#ffffff;
-  border-radius:28px;
-  border:1px solid #d1e8da;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(45,122,79,0.12), 0 0 0 1px rgba(45,122,79,0.08);
-  max-width:360px;
-  margin:0 auto;
+  background:white;border-radius:28px;
+  border:1px solid var(--border);
+  box-shadow:0 20px 60px rgba(45,122,79,.12),0 0 0 1px rgba(45,122,79,.06);
+  max-width:340px;margin:0 auto;overflow:hidden;
 }
 .phone-bar{
-  background:var(--green);
-  padding:14px 18px;
+  background:var(--green);padding:13px 16px;
   display:flex;align-items:center;gap:10px;
 }
-.ph-av{width:34px;height:34px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ph-av{width:32px;height:32px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .ph-name{font-weight:700;color:white;font-size:13px}
 .ph-status{font-size:10px;color:#a8e6c0;display:flex;align-items:center;gap:4px}
 .ph-status::before{content:'';width:5px;height:5px;background:#5de89a;border-radius:50%}
-.phone-msgs{padding:16px;display:flex;flex-direction:column;gap:10px;background:#f9faf8;min-height:300px}
-.pm{display:flex;gap:7px;align-items:flex-end}
+.phone-msgs{padding:14px;display:flex;flex-direction:column;gap:9px;background:#f8faf8;min-height:260px}
+.pm{display:flex;gap:6px;align-items:flex-end}
 .pm.u{flex-direction:row-reverse}
-.pm-av{width:24px;height:24px;border-radius:50%;background:var(--mid);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;flex-shrink:0}
+.pm-av{width:22px;height:22px;border-radius:50%;background:var(--mid);display:flex;align-items:center;justify-content:center;font-size:9px;color:white;font-weight:700;flex-shrink:0}
 .pm.u .pm-av{background:#dde8e0;color:var(--green)}
-.pm-b{max-width:82%;padding:8px 12px;border-radius:14px;font-size:13px;line-height:1.55;font-family:'Heebo',sans-serif;color:var(--text)}
-.pm.bot .pm-b{background:white;border:1px solid #deeadf;border-bottom-right-radius:3px}
+.pm-b{max-width:82%;padding:8px 12px;border-radius:14px;font-size:12.5px;line-height:1.55;font-family:'Heebo',sans-serif}
+.pm.bot .pm-b{background:white;border:1px solid #deeadf;border-bottom-right-radius:3px;color:var(--text)}
 .pm.u .pm-b{background:var(--green);color:white;border-bottom-left-radius:3px}
-.pm-chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 8px 8px}
-.chip{background:white;border:1.5px solid var(--mid);color:var(--green);padding:5px 11px;border-radius:50px;font-size:11px;font-family:'Heebo',sans-serif;font-weight:500}
+.pm-chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 6px 6px}
+.pm-chip{background:white;border:1.5px solid var(--mid);color:var(--green);padding:4px 10px;border-radius:50px;font-size:11px;font-family:'Heebo',sans-serif;font-weight:500}
 
-/* ── FEATURES ── */
-.features{padding:6rem 8vw;background:#eef4f0;position:relative}
-.section-tag{font-size:12px;font-weight:600;letter-spacing:.1em;color:#2d7a4f;text-transform:uppercase;margin-bottom:.75rem}
-.section-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;margin-bottom:1rem;line-height:1.2;color:#111827}
-.section-sub{color:#6b7280;font-size:1rem;max-width:500px;line-height:1.7;margin-bottom:3.5rem}
-.features-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
+/* ═══ PESTS ═══ */
+.pests{padding:5rem 8vw;background:white;border-top:1px solid var(--border)}
+.pests-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;
 }
-.feat-card{
-  background:#fafcfa;
-  border:1px solid #ddeae2;
-  border-radius:16px;
-  padding:1.8rem;
-  transition:border-color .2s,box-shadow .2s;
+.pest-card{
+  border:1.5px solid var(--border);border-radius:14px;
+  padding:1.2rem 1.4rem;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s;
+  background:white;
 }
-.feat-card:hover{border-color:#a8d4b8;box-shadow:0 4px 20px rgba(45,122,79,0.08)}
-.feat-icon{
-  width:44px;height:44px;
-  background:rgba(45,122,79,0.1);
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;margin-bottom:1.2rem;
-}
-.feat-title{font-size:1rem;font-weight:700;color:#111827;margin-bottom:.5rem}
-.feat-desc{font-size:.875rem;color:#6b7280;line-height:1.65}
+.pest-card:hover{border-color:var(--mid);box-shadow:0 4px 16px rgba(45,122,79,.1);transform:translateY(-2px)}
+.pest-emoji{font-size:1.8rem;flex-shrink:0}
+.pest-info{}
+.pest-name{font-weight:700;font-size:.95rem;color:var(--text)}
+.pest-price{font-size:.8rem;color:var(--mid);font-weight:600;margin-top:2px}
 
-/* ── HOW IT WORKS ── */
-.how{
-  padding:6rem 8vw;
-  background:#f6f8f6;
-  position:relative;
-  border-top:1px solid #ddeae2;
-  border-bottom:1px solid #ddeae2;
-}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;position:relative}
-.steps::before{
-  content:'';
-  position:absolute;
-  top:28px;right:12%;left:12%;
-  height:1px;
-  background:linear-gradient(90deg,transparent,#c8e0d2,#c8e0d2,transparent);
-}
+/* ═══ HOW IT WORKS ═══ */
+.how{padding:5rem 8vw;background:var(--bg);border-top:1px solid var(--border)}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--mid);text-transform:uppercase;margin-bottom:.6rem}
+.section-title{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;line-height:1.2;color:var(--text);margin-bottom:.8rem}
+.section-sub{color:var(--gray);font-size:.95rem;line-height:1.75;max-width:460px;margin-bottom:3rem}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;margin-top:3rem}
+.steps::before{content:'';position:absolute;top:27px;right:14%;left:14%;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent)}
 .step{text-align:center;position:relative}
 .step-num{
-  width:56px;height:56px;
-  border-radius:50%;
-  background:#e8f2ec;
-  border:2px solid #b8d8c6;
+  width:54px;height:54px;border-radius:50%;
+  background:#e8f2ec;border:2px solid #b8d8c6;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;font-weight:700;color:#2d7a4f;
-  margin:0 auto 1.2rem;
+  font-size:1rem;font-weight:700;color:var(--mid);
+  margin:0 auto 1rem;
 }
-.step-title{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:#111827}
-.step-desc{font-size:.8rem;color:#6b7280;line-height:1.6}
+.step-title{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+.step-desc{font-size:.8rem;color:var(--gray);line-height:1.6}
 
-/* ── TRUST ── */
-.trust{padding:5rem 8vw;background:#eef4f0}
-.trust-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1.5rem;
-  margin-top:3rem;
+/* ═══ FEATURES ═══ */
+.features{padding:5rem 8vw;background:var(--bg2);border-top:1px solid var(--border)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem}
+.feat-card{
+  background:white;border:1px solid var(--border);
+  border-radius:16px;padding:1.6rem;
+  transition:border-color .2s,box-shadow .2s;
 }
-.trust-item{
-  background:#fafcfa;
-  border:1px solid #ddeae2;
-  border-radius:14px;
-  padding:1.5rem;
-  text-align:center;
-}
-.trust-num{font-size:2rem;font-weight:700;color:#2d7a4f;display:block;margin-bottom:.3rem}
-.trust-lbl{font-size:.85rem;color:#6b7280}
+.feat-card:hover{border-color:rgba(45,122,79,.4);box-shadow:0 4px 20px rgba(45,122,79,.08)}
+.feat-icon{width:42px;height:42px;background:rgba(45,122,79,.09);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:1rem}
+.feat-title{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.feat-desc{font-size:.85rem;color:var(--gray);line-height:1.65}
 
-/* ── CTA BOTTOM ── */
+/* ═══ TESTIMONIALS ═══ */
+.testimonials{padding:5rem 8vw;background:white;border-top:1px solid var(--border)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.review-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:16px;padding:1.6rem;
+}
+.stars{color:#f59e0b;font-size:1.1rem;margin-bottom:.8rem}
+.review-text{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1rem}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-av{width:36px;height:36px;border-radius:50%;background:var(--mid);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;flex-shrink:0}
+.review-name{font-weight:600;font-size:.9rem}
+.review-city{font-size:.78rem;color:var(--gray)}
+
+/* ═══ TRUST ═══ */
+.trust{padding:4rem 8vw;background:var(--bg2);border-top:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem}
+.trust-item{background:white;border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:center}
+.trust-num{font-size:1.9rem;font-weight:700;color:var(--mid);display:block;margin-bottom:.25rem}
+.trust-lbl{font-size:.82rem;color:var(--gray)}
+
+/* ═══ CTA BOTTOM ═══ */
 .cta-bottom{
-  padding:6rem 8vw;
-  text-align:center;
-  background:#e8f2ec;
+  padding:5rem 8vw;text-align:center;
+  background:linear-gradient(135deg,var(--green),#1e5c37);
+  position:relative;overflow:hidden;
+}
+.cta-bottom::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(76,175,118,.15) 0%,transparent 70%);pointer-events:none}
+.cta-bottom h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:white;margin-bottom:.8rem;position:relative}
+.cta-bottom p{color:rgba(255,255,255,.75);font-size:1rem;margin-bottom:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;position:relative;line-height:1.75}
+.btn-white{
+  display:inline-flex;align-items:center;gap:8px;
+  background:white;color:var(--green);
+  font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;
+  padding:14px 30px;border-radius:50px;border:none;cursor:pointer;
+  text-decoration:none;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
   position:relative;
-  overflow:hidden;
-  border-top:1px solid #cce0d4;
 }
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.btn-wa-big{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#25D366;color:white;
+  font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;
+  padding:14px 30px;border-radius:50px;text-decoration:none;
+  transition:opacity .2s;position:relative;
+}
+.btn-wa-big:hover{opacity:.9}
 
-.cta-bottom h2{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;margin-bottom:1rem;color:#111827}
-.cta-bottom p{color:#6b7280;font-size:1rem;margin-bottom:2.5rem;max-width:500px;margin-left:auto;margin-right:auto;position:relative}
-
-/* ── FOOTER ── */
+/* ═══ FOOTER ═══ */
 footer{
-  padding:2rem 8vw;
-  border-top:1px solid #e2ede8;
-  background:#f6f8f6;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:1rem;
+  padding:2rem 8vw;border-top:1px solid var(--border);
+  background:var(--bg);display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:1rem;
 }
-.footer-logo{font-weight:700;font-size:.95rem}
-.footer-logo span{color:var(--light)}
+.footer-logo{font-weight:700;font-size:.95rem;color:var(--text)}
+.footer-logo span{color:var(--mid)}
 .footer-links{display:flex;gap:2rem}
-.footer-links a{color:#6b7280;font-size:.85rem;text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--white)}
+.footer-links a{color:var(--gray);font-size:.83rem;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--mid)}
 
-/* ── MODAL CHAT ── */
-.modal-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.5);
-  backdrop-filter:blur(6px);
-  z-index:1000;
-  display:none;
-  align-items:center;justify-content:center;
-  padding:1rem;
+/* ═══ FLOATING BUTTON ═══ */
+.float-btn{
+  position:fixed;bottom:24px;left:24px;z-index:200;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,.45);
+  transition:transform .2s,box-shadow .2s;
+  animation:fadeUp .8s 1s ease both;
 }
-@media(max-width:600px){
-  .modal-overlay{padding:0}
-  .modal-chat{border-radius:0;max-height:100vh;height:100vh;max-width:100%}
-  .modal-close{top:1rem;left:1rem}
+.float-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);z-index:300;
+  display:none;align-items:center;justify-content:center;padding:1rem;
 }
 .modal-overlay.open{display:flex}
 .modal-chat{
-  background:white;
-  border-radius:24px;
-  width:100%;max-width:460px;
-  height:85vh;max-height:700px;
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:0 32px 80px rgba(0,0,0,0.4);
+  background:white;border-radius:24px;
+  width:100%;max-width:460px;height:85vh;max-height:700px;
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 32px 80px rgba(0,0,0,.35);
   animation:popIn .25s cubic-bezier(.34,1.56,.64,1) both;
 }
-@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .modal-close{
-  position:absolute;top:1.5rem;left:1.5rem;
-  width:36px;height:36px;
-  background:rgba(0,0,0,0.15);
-  border:none;border-radius:50%;
-  color:white;font-size:18px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;
-  z-index:10;
+  position:absolute;top:1.2rem;left:1.2rem;
+  width:34px;height:34px;background:rgba(0,0,0,.18);
+  border:none;border-radius:50%;color:white;font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;
 }
-.modal-close:hover{background:rgba(0,0,0,0.25)}
+.modal-close:hover{background:rgba(0,0,0,.28)}
 .modal-wrapper{position:relative}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ── RESPONSIVE ── */
-@media(max-width:480px){
-  .hero{padding:4rem 5vw 3rem}
-  h1{font-size:2.2rem}
-  .hero-sub{font-size:1rem}
-  .btn-primary,.btn-secondary{width:100%;justify-content:center}
-  .cta-group{flex-direction:column}
-  .stats-row{gap:1.5rem}
-  .stat-num{font-size:1.5rem}
-  .features{padding:4rem 5vw}
-  .how{padding:4rem 5vw}
-  .trust{padding:3rem 5vw}
-  .cta-bottom{padding:4rem 5vw}
-  footer{padding:1.5rem 5vw;flex-direction:column;gap:.75rem}
-}
-
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;padding:5rem 6vw 3rem;text-align:center}
-  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero{grid-template-columns:1fr;padding:4rem 6vw;text-align:center}
+  .hero-sub{margin:0 auto 2.5rem}
   .cta-group{justify-content:center}
   .stats-row{justify-content:center}
-  .hero-chat{display:none}
-  .features-grid{grid-template-columns:1fr 1fr}
+  .hero-phone{display:none}
+  .features-grid,.reviews-grid{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr 1fr}
   .steps::before{display:none}
   .trust-grid{grid-template-columns:1fr 1fr}
+  .pests-grid{grid-template-columns:1fr 1fr}
   footer{justify-content:center;text-align:center}
   .footer-links{justify-content:center}
+  nav .nav-phone{display:none}
 }
-@media(max-width:560px){
-  .features-grid,.trust-grid{grid-template-columns:1fr}
+@media(max-width:600px){
+  .hero{padding:3.5rem 5vw}
+  h1{font-size:2.2rem}
+  .features-grid,.reviews-grid,.pests-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .cta-bottom{padding:4rem 5vw}
+  .modal-overlay{padding:0}
+  .modal-chat{border-radius:0;max-height:100vh;height:100vh;max-width:100%}
+  .modal-close{top:.8rem;left:.8rem}
+  footer{flex-direction:column;gap:.6rem;text-align:center}
+  .footer-links{justify-content:center;flex-wrap:wrap;gap:1rem}
 }
 </style>
 </head>
 <body>
 
-<!-- ── HERO ── -->
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">🪲 <span>אביה</span> הדברות</a>
+  <div class="nav-actions">
+    <a class="nav-phone" href="tel:0779979673">📞 077-997-9673</a>
+    <a class="nav-wa" href="https://wa.me/972527807612" target="_blank">💬 WhatsApp</a>
+    <button class="nav-cta" onclick="openChat()">💬 קבל מחיר עכשיו</button>
+  </div>
+</nav>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="badge-row">
-      <div class="live-badge"><span class="live-dot"></span>זמין עכשיו · מענה מיידי</div>
-    </div>
-
-    <h1>הדברה מקצועית —<br><em>פתרון תוך דקה</em></h1>
-
-    <p class="hero-sub">גילית מזיק? תאר את הבעיה, קבל מחיר מיידי, וקבע תור — הכל בשיחה אחת עם הבוט שלנו. ללא המתנה, ללא טפסים.</p>
-
+    <div class="badge"><span class="live-dot"></span>זמין עכשיו · מענה מיידי</div>
+    <h1>גילית מזיק?<br><em>תוך דקה — מחיר + תיאום</em></h1>
+    <p class="hero-sub">ספר לנו מה הבעיה, מה הנכס, ונחזיר לך מחיר מדויק ומועד שנוח לך — בלי להמתין, בלי "נחזור אליך".</p>
     <div class="cta-group">
-      <a href="#" class="btn-primary" onclick="openChat(); return false;">
-        💬 התחל שיחה עכשיו
-      </a>
-      <a href="tel:0779979673" class="btn-secondary">
-        📞 077-997-9673
-      </a>
+      <button class="btn-main" onclick="openChat()">🤖 התחל שיחה עכשיו</button>
+      <a class="btn-outline" href="tel:0779979673">📞 077-997-9673</a>
     </div>
-
     <div class="stats-row">
-      <div>
-        <span class="stat-num">20+</span>
-        <div class="stat-lbl">שנות ניסיון</div>
-      </div>
-      <div>
-        <span class="stat-num">300+</span>
-        <div class="stat-lbl">המלצות</div>
-      </div>
-      <div>
-        <span class="stat-num">כל הארץ</span>
-        <div class="stat-lbl">פריסה</div>
-      </div>
+      <div><span class="stat-num">20+</span><div class="stat-lbl">שנות ניסיון</div></div>
+      <div><span class="stat-num">300+</span><div class="stat-lbl">לקוחות מרוצים</div></div>
+      <div><span class="stat-num">ללא</span><div class="stat-lbl">תוספת נסיעה</div></div>
     </div>
   </div>
 
-  <!-- תצוגה מקדימה של הצ'אט -->
-  <div class="hero-chat">
+  <div class="hero-phone">
     <div class="phone-frame">
       <div class="phone-bar">
         <div class="ph-av">🪲</div>
@@ -398,197 +371,229 @@ footer{
       <div class="phone-msgs">
         <div class="pm bot">
           <div class="pm-av">א</div>
-          <div class="pm-b">שלום! 👋 גילית מזיק בבית?<br>תן לי דקה ואני נותן לך פתרון + מחיר מיידי.</div>
+          <div class="pm-b">שלום! 👋 גילית מזיק בבית או בעסק?<br>תן לי דקה ואני נותן מחיר מיידי.</div>
         </div>
         <div class="pm-chips">
-          <span class="chip">🏠 פרטי</span>
-          <span class="chip">🏪 עסק</span>
+          <span class="pm-chip">🏠 פרטי</span>
+          <span class="pm-chip">🏪 עסק</span>
         </div>
         <div class="pm u">
           <div class="pm-av">👤</div>
-          <div class="pm-b">יש לי גוקים בדירה</div>
+          <div class="pm-b">יש לי ג'וקים בדירה</div>
         </div>
         <div class="pm bot">
           <div class="pm-av">א</div>
-          <div class="pm-b">ג'וקים בדירה — יש לזה פתרון טוב. ריסוס + ג'ל פיתיון.<br><br>מחיר: 300–450 ₪ | אחריות 3–6 חודשים 🎯</div>
-        </div>
-        <div class="pm bot">
-          <div class="pm-av">א</div>
-          <div class="pm-b">תרצה שנתאם מועד?</div>
+          <div class="pm-b">ג'וקים בדירה — יש לזה פתרון מצוין! ריסוס + ג'ל פיתיון.<br><br>💰 300–450 ₪ | אחריות 3–6 חודשים ✅</div>
         </div>
         <div class="pm-chips">
-          <span class="chip">☀️ יום שני — בוקר</span>
-          <span class="chip">🌤️ יום שני — אחה"צ</span>
+          <span class="pm-chip">☀️ יום ראשון — בוקר</span>
+          <span class="pm-chip">🌤️ יום שני — אחה"צ</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FEATURES ── -->
-<section class="features">
-  <div class="reveal">
-    <div class="section-tag">למה אביה הדברות</div>
-    <h2 class="section-title">שירות שמגיע אליך —<br>לא להיפך</h2>
-    <p class="section-sub">אנחנו לא מחכים שתתקשר. הבוט עונה 24/7, מאבחן, מתמחר — ואתה מקבל תור מסודר.</p>
+<!-- PESTS -->
+<section class="pests reveal">
+  <div style="text-align:center;margin-bottom:0">
+    <div class="section-tag">מה מטריד אותך?</div>
+    <h2 class="section-title">לחץ על המזיק — קבל מחיר מיידי</h2>
+    <p class="section-sub" style="margin:0.6rem auto 0;text-align:center">הבוט יאבחן, יתמחר וייקבע פגישה בתוך דקות.</p>
   </div>
-
-  <div class="features-grid reveal">
-    <div class="feat-card">
-      <div class="feat-icon">⚡</div>
-      <div class="feat-title">מענה תוך שניות</div>
-      <div class="feat-desc">הבוט עונה 24 שעות ביממה, 7 ימים בשבוע. לא צריך להמתין לשעות פעילות.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">💰</div>
-      <div class="feat-title">מחיר שקוף מיידי</div>
-      <div class="feat-desc">מחירון מדויק לפי סוג המזיק והנכס. ללא הפתעות, ללא "נחזור אליך".</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">📅</div>
-      <div class="feat-title">תיאום עצמאי</div>
-      <div class="feat-desc">קובע תור בשני לחיצות לפי לוח הזמנים שלנו. מקבל אישור ב-WhatsApp.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🛡️</div>
-      <div class="feat-title">הדברה ירוקה ובטוחה</div>
-      <div class="feat-desc">חומרים מאושרים ע"י המשרד לאיכות הסביבה. בטוח לילדים, חיות מחמד ומזון.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">✅</div>
-      <div class="feat-title">אחריות מלאה</div>
-      <div class="feat-desc">3–6 חודשים על רוב הטיפולים. חזרנו אם המזיק חזר — ללא עלות נוספת.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🏭</div>
-      <div class="feat-title">פתרון לעסקים</div>
-      <div class="feat-desc">מסעדות, מחסנים, בתי אבות, קיבוצים — תוכנית תחזוקה שוטפת עם תעודה לרשויות.</div>
-    </div>
+  <div class="pests-grid reveal" style="margin-top:2.5rem">
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🪳</span><div class="pest-info"><div class="pest-name">ג'וקים</div><div class="pest-price">מ-300 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🐭</span><div class="pest-info"><div class="pest-name">עכברים / חולדות</div><div class="pest-price">מ-600 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🛏️</span><div class="pest-info"><div class="pest-name">פשפש מיטה</div><div class="pest-price">מ-1,500 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🐜</span><div class="pest-info"><div class="pest-name">נמלים</div><div class="pest-price">מ-400 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🔥</span><div class="pest-info"><div class="pest-name">נמלת אש</div><div class="pest-price">מ-600 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🦟</span><div class="pest-info"><div class="pest-name">יתושים</div><div class="pest-price">מ-600 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🐦</span><div class="pest-info"><div class="pest-name">יונים</div><div class="pest-price">מ-800 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🐝</span><div class="pest-info"><div class="pest-name">צרעות</div><div class="pest-price">מ-300 ₪</div></div></div>
+    <div class="pest-card" onclick="openChat()"><span class="pest-emoji">🐛</span><div class="pest-info"><div class="pest-name">פרעושים / קרציות</div><div class="pest-price">מ-450 ₪</div></div></div>
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
+<!-- HOW IT WORKS -->
 <section class="how">
   <div class="reveal" style="text-align:center">
     <div class="section-tag">איך זה עובד</div>
-    <h2 class="section-title">מהבעיה לפתרון — 4 צעדים</h2>
-    <p class="section-sub" style="margin-left:auto;margin-right:auto;text-align:center">הבוט מנחה אותך בדיוק לאן שצריך.</p>
+    <h2 class="section-title">4 צעדים — פגישה מוסדרת</h2>
+    <p class="section-sub" style="margin:0.6rem auto 2.5rem;text-align:center">מהרגע שאתה פותח את הצ'אט ועד הגעת שלומי אליך.</p>
   </div>
   <div class="steps reveal">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-title">תאר את הבעיה</div>
-      <div class="step-desc">גוקים? עכברים? פשפשים? תבחר מהרשימה או תכתוב בחופשי.</div>
+      <div class="step-title">פתח את הצ'אט</div>
+      <div class="step-desc">בחר מזיק, ענה 3 שאלות קצרות — הבוט מבין הכל.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-title">קבל פתרון ומחיר</div>
-      <div class="step-desc">הבוט מסביר מה נעשה ונותן טווח מחיר מדויק.</div>
+      <div class="step-title">קבל מחיר מיידי</div>
+      <div class="step-desc">מחיר מדויק ומותאם לנכס שלך — עוד לפני שדיברת עם אחד.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-title">קבע תור</div>
-      <div class="step-desc">בחר מועד מהמועדים הקרובים — בוקר או אחה"צ.</div>
+      <div class="step-title">קבע מועד</div>
+      <div class="step-desc">בחר יום ושעה שנוחים לך — שלומי יגיע בדיוק.</div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <div class="step-title">אישור ב-WhatsApp</div>
-      <div class="step-desc">מקבל סיכום מיידי. שלומי מאשר ומגיע בזמן.</div>
+      <div class="step-title">אישור בWhatsApp</div>
+      <div class="step-desc">סיכום הפגישה מגיע אליך ולשלומי — הכל מסודר.</div>
     </div>
   </div>
 </section>
 
-<!-- ── TRUST ── -->
+<!-- FEATURES -->
+<section class="features">
+  <div class="reveal">
+    <div class="section-tag">למה אביה הדברות</div>
+    <h2 class="section-title">לא סתם עוד מדביר — <br>זה מה שמייחד אותנו</h2>
+    <p class="section-sub">שלומי לוי הוא מדביר מוסמך עם 20+ שנה ניסיון. לא טכנאי — מומחה.</p>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feat-card">
+      <div class="feat-icon">🕐</div>
+      <div class="feat-title">מענה מיידי 24/7</div>
+      <div class="feat-desc">הבוט זמין תמיד. מחיר ותיאום — אפילו בשעות הלילה, ללא המתנה.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💰</div>
+      <div class="feat-title">מחיר שקוף מראש</div>
+      <div class="feat-desc">אתה יודע כמה עולה לפני שמישהו מגיע. ללא הפתעות, ללא "ייעוץ בתשלום".</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📍</div>
+      <div class="feat-title">הגעה ארצית</div>
+      <div class="feat-desc">מגיעים לכל מקום בישראל — ללא תוספת נסיעה. צפון, דרום, מרכז.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛡️</div>
+      <div class="feat-title">אחריות על כל טיפול</div>
+      <div class="feat-desc">3–6 חודשי אחריות על כל טיפול. חזר המזיק? חוזרים גם אנחנו.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌿</div>
+      <div class="feat-title">חומרים בטוחים</div>
+      <div class="feat-desc">טיפולים מותאמים לבתים עם ילדים וחיות מחמד. בטיחות בראש סדר העדיפויות.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏢</div>
+      <div class="feat-title">פרטי ועסקי</div>
+      <div class="feat-desc">דירות, בתים, מסעדות, מחסנים, קיבוצים — ניסיון בכל סוגי הנכסים.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="reveal" style="text-align:center">
+    <div class="section-tag">לקוחות מספרים</div>
+    <h2 class="section-title">מה אומרים עלינו</h2>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">שלומי הגיע יום אחרי שפניתי. הסביר בסבלנות, טיפל יסודי, ולא ראינו ג'וק מאז. ממליץ בחום!</p>
+      <div class="review-author">
+        <div class="review-av">ד</div>
+        <div><div class="review-name">דני כהן</div><div class="review-city">תל אביב</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">קבלנו הצעת מחיר מיידית דרך הבוט, הכל היה שקוף ומסודר. שלומי מקצועי ואמין — בדיוק מה שחיפשנו.</p>
+      <div class="review-author">
+        <div class="review-av">מ</div>
+        <div><div class="review-name">מיכל לוי</div><div class="review-city">ירושלים</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">בעיה של עכברים שנמשכה חודשים — שלומי פתר אותה בביקור אחד. יודע את העבודה, אנושי ויסודי.</p>
+      <div class="review-author">
+        <div class="review-av">א</div>
+        <div><div class="review-name">אורי מזרחי</div><div class="review-city">חיפה</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
 <section class="trust">
-  <div class="reveal" style="text-align:center;margin-bottom:0">
-    <div class="section-tag">בשיתוף לקוחות מרוצים</div>
+  <div class="reveal" style="text-align:center">
+    <div class="section-tag">במספרים</div>
     <h2 class="section-title">מספרים שמדברים</h2>
   </div>
   <div class="trust-grid reveal">
-    <div class="trust-item">
-      <span class="trust-num">20+</span>
-      <div class="trust-lbl">שנות ניסיון בתחום</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num">300+</span>
-      <div class="trust-lbl">המלצות כתובות</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num">24/7</span>
-      <div class="trust-lbl">זמינות לחירום</div>
-    </div>
-    <div class="trust-item">
-      <span class="trust-num">כל הארץ</span>
-      <div class="trust-lbl">פריסה ארצית</div>
-    </div>
+    <div class="trust-item"><span class="trust-num">20+</span><div class="trust-lbl">שנות ניסיון מוסמך</div></div>
+    <div class="trust-item"><span class="trust-num">300+</span><div class="trust-lbl">לקוחות מרוצים</div></div>
+    <div class="trust-item"><span class="trust-num">24/7</span><div class="trust-lbl">מענה דיגיטלי</div></div>
+    <div class="trust-item"><span class="trust-num">ללא</span><div class="trust-lbl">תוספת נסיעה</div></div>
   </div>
 </section>
 
-<!-- ── CTA BOTTOM ── -->
+<!-- CTA BOTTOM -->
 <section class="cta-bottom reveal">
-  <h2>יש מזיק? בואו נסגור את זה עכשיו</h2>
-  <p>תיאור הבעיה לוקח דקה אחת. המחיר מיידי. התור — עוד היום.</p>
-  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-    <a href="#" class="btn-primary" onclick="openChat(); return false;" style="font-size:1.1rem;padding:16px 32px">
-      💬 התחל שיחה עם הבוט
-    </a>
-    <a href="tel:0779979673" class="btn-secondary" style="font-size:1.1rem;padding:16px 32px">
-      📞 077-997-9673
-    </a>
+  <h2>מוכן להיפטר מהמזיק?</h2>
+  <p>תוך דקה אחת תקבל מחיר מדויק ותקבע פגישה. הבוט זמין עכשיו — בחינם, ללא התחייבות.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative">
+    <button class="btn-white" onclick="openChat()">🤖 פתח צ'אט עכשיו</button>
+    <a class="btn-wa-big" href="https://wa.me/972527807612" target="_blank">💬 שלח WhatsApp לשלומי</a>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">אביה <span>הדברות</span></div>
+  <div class="footer-logo">🪲 <span>אביה</span> הדברות</div>
   <div class="footer-links">
     <a href="https://www.aviahadbarot.com" target="_blank">אתר ראשי</a>
     <a href="tel:0779979673">077-997-9673</a>
-    <a href="https://wa.me/972779979673">WhatsApp</a>
+    <a href="tel:0527807612">052-780-7612</a>
+    <a href="https://wa.me/972527807612" target="_blank">WhatsApp</a>
   </div>
-  <div style="font-size:.8rem;color:var(--gray)">© 2025 אביה הדברות</div>
+  <div style="font-size:.78rem;color:var(--gray)">© 2025 אביה הדברות · שלומי לוי מדביר מוסמך</div>
 </footer>
 
-<!-- ── MODAL CHAT ── -->
+<!-- FLOATING BUTTON -->
+<a class="float-btn" href="https://wa.me/972527807612" target="_blank" title="שלח הודעה בWhatsApp">💬</a>
+
+<!-- MODAL -->
 <div class="modal-overlay" id="chatModal">
-  <button class="modal-close" onclick="closeChat()">✕</button>
+  <div class="modal-wrapper">
+    <button class="modal-close" onclick="closeChat()">✕</button>
+  </div>
   <div class="modal-chat" id="chatContainer"></div>
 </div>
 
 <script>
-// ── reveal on scroll ──
+// Reveal on scroll
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ── chat modal ──
+// Chat modal
 let botLoaded = false;
-
 function openChat(){
   document.getElementById('chatModal').classList.add('open');
   document.body.style.overflow = 'hidden';
   if(!botLoaded) loadBot();
 }
-
 function closeChat(){
   document.getElementById('chatModal').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 document.getElementById('chatModal').addEventListener('click', e => {
   if(e.target === document.getElementById('chatModal')) closeChat();
 });
-
 function loadBot(){
   botLoaded = true;
-  const container = document.getElementById('chatContainer');
-
-  // טוען את הבוט בתוך iframe
   const iframe = document.createElement('iframe');
   iframe.src = 'avia-bot-v9.html';
-  iframe.style.cssText = 'width:100%;height:100%;border:none;border-radius:24px';
-  container.appendChild(iframe);
+  iframe.style.cssText = 'width:100%;height:100%;border:none;flex:1';
+  document.getElementById('chatContainer').appendChild(iframe);
 }
 </script>
 </body>
